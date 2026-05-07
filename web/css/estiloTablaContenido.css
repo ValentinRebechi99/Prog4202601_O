@@ -1,0 +1,303 @@
+/* Tabla de contendios para cursos y estudiantes*/
+:root {
+    --azul-primario: #2563eb;
+    --gris-fondo: #f9fafb;
+    --gris-borde: #e5e7eb;
+    --texto-suave: #6b7280;
+}
+
+/* Contenedor principal de la página, asumiendo flexbox para el sidebar */
+.main-layout {
+    display: flex;
+    min-height: calc(100vh - 80px); /* Ajustar según altura de header */
+}
+
+
+.sidebar {
+    width: 250px;
+    background-color: #0c334f; 
+    color: white;
+    padding: 20px;
+}
+
+/* Área de contenido principal que ahora se expande */
+.main-content {
+    flex-grow: 1; /* Ocupa todo el espacio restante */
+    background-color: var(--gris-fondo);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor de cursos ahora full-width */
+.contenedor-cursos {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 30px; /* Más espacio interior */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Encabezado con Título y Botón Nuevo en extremos */
+.header-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header-seccion h2 {
+    font-size: 28px; /* Título más grande */
+    font-weight: 600;
+    margin: 0;
+}
+
+.btn-nuevo {
+    background-color: var(--azul-primario);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Filtros expandidos */
+.filtros-cursos {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.input-busqueda {
+    flex-grow: 1; /* El buscador se estira sustancialmente */
+}
+
+.input-busqueda input {
+    width: 100%; /* Ocupa todo su contenedor flex */
+    padding: 10px 15px;
+    border: 1px solid var(--gris-borde);
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.select-filtro {
+    padding: 10px 15px;
+    border: 1px solid var(--gris-borde);
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 180px; /* Ancho mínimo para los selectores */
+}
+
+/* Estilo de la Tabla full-width */
+.tabla-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--gris-borde);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Para que la tabla se deslice internamente si es necesario */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Columnas de ancho fijo para mejor distribución */
+}
+
+th {
+    text-align: left;
+    padding: 15px 20px;
+    background-color: #fcfcfc;
+    color: var(--texto-suave);
+    font-weight: 500;
+    border-bottom: 1px solid var(--gris-borde);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Ancho de columnas específicas si es necesario */
+th:nth-child(1) { width: 30%; } /* Curso */
+th:nth-child(2) { width: 20%; } /* Instructor */
+/* Las demás columnas se distribuyen el resto */
+
+.tabla-vacia {
+    padding: 80px;
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 18px;
+}
+
+/* Pie de tabla expandido con elementos en extremos */
+.footer-tabla {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid var(--gris-borde);
+    margin-top: auto; /* Empuja el footer al final si la tabla es corta */
+}
+
+.badge-registros {
+    background-color: var(--azul-primario);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.paginacion {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--texto-suave);
+    font-size: 16px;
+}
+
+.paginacion button {
+    border: none;
+    background: none;
+    color: #ccc; /* Deshabilitado por defecto */
+    cursor: not-allowed;
+    font-size: 16px;
+}
+/* Tabla Index*/
+:root {
+    --bg-page: #f4f6f8;
+    --white: #ffffff;
+    --text-main: #1e293b;
+    --text-sub: #64748b;
+    --border-color: #e2e8f0;
+}
+
+.dashboard-wrapper {
+    padding: 40px;
+    background-color: var(--bg-page);
+    font-family: 'Inter', sans-serif;
+}
+
+.dashboard-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    color: var(--text-main);
+    margin-bottom: 30px;
+}
+
+/* Grilla de Métricas */
+.metrics-grid {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.metric-card {
+    background: var(--white);
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1; /* Ocupan el mismo ancho */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.blue-bg { background: #eff6ff; color: #3b82f6; }
+.green-bg { background: #f0fdf4; color: #22c55e; }
+.purple-bg { background: #faf5ff; color: #a855f7; }
+
+.metric-info .label {
+    display: block;
+    color: var(--text-sub);
+    font-size: 14px;
+}
+
+.metric-info .value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* Accesos Rápidos */
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 20px;
+}
+
+.course-link-card {
+    text-decoration: none; /* Quita el subrayado del enlace */
+    color: inherit;
+    display: block;
+    width: fit-content;
+}
+
+.course-card {
+    background: var(--white);
+    padding: 24px;
+    border-radius: 16px;
+    min-width: 320px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.course-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.course-name {
+    font-size: 20px;
+    margin: 0 0 4px 0;
+}
+
+.instructor-name {
+    color: var(--text-sub);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Barra de Progreso */
+.progress-container {
+    display: flexbox;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #e2e8f0; /* Color según la imagen */
+}
+
+.progress-text {
+    font-size: 12px;
+    color: var(--text-sub);
+    min-width: 30px;
+}
