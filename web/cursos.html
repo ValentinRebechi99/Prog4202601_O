@@ -41,18 +41,16 @@
 
     <div class="filtros-cursos">
         <div class="input-busqueda">
-            <input type="text" placeholder="Buscar por nombre o instructor..">
+            <input type="text" placeholder="Buscar por curso o docente..">
         </div>
         <select class="select-filtro">
-            <option>Activos</option>
-            <option>Completos</option>
+            <option>Con Cupo Disponible</option>
+            <option>Sin Cupo</option>
+            <option>En Curso</option>
             <option>Finalizados</option>
         </select>
-        <select class="select-filtro">
-            <option>Todas las inscripciones</option>
-            <option>En proceso</option>
-            <option>Completadas</option>
-        </select>
+      
+
     </div>
 
     <div class="tabla-card">
@@ -61,16 +59,15 @@
                 <tr>
                     <th>Curso</th>
                     <th>Docente</th>
-                    <th>Fechas</th>
-                    <th>Cupo</th>
-                    <th>Inscripción</th>
+                    <th>Inicio</th>
+                    <th>Cantidad de Horas</th>
+                    <th>Capacidad Max</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="7" class="tabla-vacia">No se encontraron cursos.</td>
+                    <td colspan="6" class="tabla-vacia">No se encontraron cursos.</td>
                 </tr>
             </tbody>
         </table>
