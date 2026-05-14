@@ -51,17 +51,6 @@
     margin: 0;
 }
 
-.btn-nuevo {
-    background-color: var(--azul-primario);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-}
-
 /* Filtros expandidos */
 .filtros-cursos {
     display: flex;
@@ -107,7 +96,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Columnas de ancho fijo para mejor distribución */
+    table-layout: auto
 }
 
 th {
@@ -123,8 +112,8 @@ th {
 }
 
 /* Ancho de columnas específicas si es necesario */
-th:nth-child(1) { width: 30%; } /* Curso */
-th:nth-child(2) { width: 20%; } /* Instructor */
+th:nth-child(2) { width: 30%; } /* Curso */
+th:nth-child(3) { width: 20%; } /* Instructor */
 /* Las demás columnas se distribuyen el resto */
 
 .tabla-vacia {
@@ -165,7 +154,7 @@ th:nth-child(2) { width: 20%; } /* Instructor */
 .paginacion button {
     border: none;
     background: none;
-    color: #ccc; /* Deshabilitado por defecto */
+    color: #06000a; /* Deshabilitado por defecto */
     cursor: not-allowed;
     font-size: 16px;
 }

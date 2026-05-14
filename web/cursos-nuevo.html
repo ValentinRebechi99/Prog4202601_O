@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Curso - FCAD- UNER</title>
+    <link rel="stylesheet" href="css/estilo.css">
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+     <script src="js/cursos.js" type="module" defer></script>
+    </head>
+<body>
+
+    <header>
+        <div class="contenedor">
+             <h1>Nuevo Curso - FCAD- UNER</h1>
+            <img src="img/logo.png" alt="Logo de la Facultad de Ciencias de la Administración"> 
+        </div>
+    </header>
+    <div class="contenedor-principal ">
+        <nav>
+            <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="estudiantes.html">Estudiantes</a></li>
+               
+              </ul>
+    
+        
+         </nav>
+   
+       
+ <main>
+   
+        <h2>Crear Nuevo Curso</h2>
+        <form id="formCurso">
+            <div class="form-group">
+                <label for="nombre">Nombre del Curso:</label>
+                <input type="text" id="nombre" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fechaInicio">Fecha de Inicio:</label>
+                <input type="date" id="fechaInicio" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidadHoras">Cantidad de Horas:</label>
+                <input type="number" id="cantidadHoras" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidadInscriptos">Cantidad de Inscriptos:</label>
+                <input type="number" id="cantidadInscriptos" class="form-control" required>
+            </div>
+            <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar Curso</button>
+        </form>
+</main>
+    </div>
+<footer>
+        <p>&copy; 2026 Prog4202601_O . All rights reserved.</p>
+    </footer>    
+</body>

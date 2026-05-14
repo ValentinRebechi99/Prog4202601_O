@@ -8,6 +8,7 @@
      <link rel="stylesheet" href="css/bootstrap.min.css">
      <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
      <link rel="stylesheet" href="css/estiloTablaContenido.css">
+    <script src="js/cursos.js" type="module" defer></script>
     </head>
 <body>
 
@@ -32,11 +33,13 @@
    
        
  <main>
-   
-<div class="contenedor-cursos">
-    <div class="header-seccion">
+   <div id="error" class="alert alert-danger" style="display: none" role="alert"></div>
+    <div class="contenedor-cursos">
+     <div class="header-seccion">
         <h2>Cursos</h2>
-        <button class="btn-nuevo">+ Nuevo</button>
+        <div class="boton-nuevo">
+                <a href="cursos-nuevo.html" class="btn btn-secondary">+Nuevo Curso</a>
+            </div> 
     </div>
 
     <div class="filtros-cursos">
@@ -49,31 +52,30 @@
             <option>En Curso</option>
             <option>Finalizados</option>
         </select>
-      
-
+    
     </div>
 
     <div class="tabla-card">
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Curso</th>
-                    <th>Docente</th>
-                    <th>Inicio</th>
-                    <th>Cantidad de Horas</th>
+                    <th>Descripcion</th>
+                    <th>Fecha Inicio</th>
                     <th>Capacidad Max</th>
-                    <th>Estado</th>
+                    <th>Cantidad Inscriptos</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id = "tbody"> </tbody>
                 <tr>
-                    <td colspan="6" class="tabla-vacia">No se encontraron cursos.</td>
+                    
                 </tr>
-            </tbody>
+            
         </table>
 
         <div class="footer-tabla">
-            <span class="badge-registros">0 registro(s)</span>
+            <span class="badge-registros">x Registros</span>
             <div class="paginacion">
                 <button disabled>← Ant</button>
                 <span>1/1</span>
