@@ -1,0 +1,11 @@
+[
+    {
+        "idEstudiante": 1,
+        "documento": "12345678",
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "email": "juan.perez@example.com",
+        "fechaNacimiento": "2000-01-01T00:00:00.000Z",
+        "activo": true
+    }
+]
