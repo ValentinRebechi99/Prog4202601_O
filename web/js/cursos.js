@@ -12,7 +12,8 @@ const cargarCursos = async () => {
             <td>${curso.descripcion}</td>
             <td class="text-center">${new Date(curso.fechaInicio).toLocaleDateString()}</td>
             <td class="text-center">${curso.cantidadHoras}</td>
-            <td class="text-center">${curso.inscriptosMax}</td>`;
+            <td class="text-center">${curso.inscriptosMax}</td>
+            <td class="text-center">${curso.estado}</td>`;
             tabla.appendChild(fila);
         });
         document.getElementById("error").style.display = "none";

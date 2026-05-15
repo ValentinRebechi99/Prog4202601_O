@@ -1,5 +1,5 @@
 const iniciar = () => {
-    const envio = document.getElementById("btnGuardar");
+    const envio = document.getElementById("btnGuardarCurso");
     envio.addEventListener("click", async (evt) => {
         evt.preventDefault();
         evt.stopPropagation();
@@ -9,7 +9,8 @@ const iniciar = () => {
             descripcion: document.getElementById("descripcion").value,
             fechaInicio: document.getElementById("fechaInicio").value,
             cantidadHoras: document.getElementById("cantidadHoras").value,
-            cantidadInscriptos: document.getElementById("cantidadInscriptos").value
+            cantidadInscriptos: document.getElementById("cantidadInscriptos").value,
+            estado: document.getElementById("estado").value
         };
 
         console.log(obj);
