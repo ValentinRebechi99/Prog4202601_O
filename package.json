@@ -1,0 +1,24 @@
+{
+  "name": "prog4202601_o",
+  "version": "1.0.0",
+  "description": "Repositorio del Integrador de Programación 4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValentinRebechi99/Prog4202601_O.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ValentinRebechi99/Prog4202601_O/issues"
+  },
+  "homepage": "https://github.com/ValentinRebechi99/Prog4202601_O#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
