@@ -1,94 +1,96 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudiantes FCAD- UNER</title>
     <link rel="stylesheet" href="css/estilo.css">
-     <link rel="stylesheet" href="css/bootstrap.min.css">
-     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
-     <link rel="stylesheet" href="css/estiloTablaContenido.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/estiloTablaContenido.css">
     <script src="js/estudiantes.js" type="module" defer></script>
 
-    </head>
+</head>
+
 <body>
 
     <header>
         <div class="contenedor">
-             <h1>Estudiantes FCAD- UNER</h1>
-            <img src="img/logo.png" alt="Logo de la Facultad de Ciencias de la Administración"> 
+            <h1>Estudiantes FCAD- UNER</h1>
+            <img src="img/logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
         </div>
     </header>
     <div class="contenedor-principal ">
         <nav>
             <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="cursos.html">Cursos</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="estudiantes.html">Estudiantes</a></li>
-               
-              </ul>
-    
-        
-         </nav>
-   
-       
- <main>
-   <div class="contenedor-cursos">
-    <div class="header-seccion">
-        <h2>Estudiantes</h2>
-            <div class="boton-nuevo">
-                <a href="estudiantes-nuevo.html" class="btn btn-secondary">+Nuevo Estudiante</a>
-            </div> 
-       
-    </div>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
 
-    <div class="filtros-cursos">
-        <div class="input-busqueda">
-            <input type="text" placeholder="Buscar por Estudiante">
-        </div>
-        <select class="select-filtro">
-            <option>Activos</option>
-            <option>Inactivos</option>
-            
-        </select>
-        <select class="select-filtro">
-            <option>Todas las inscripciones</option>
-            <option>En proceso</option>
-            <option>Completadas</option>
-        </select>
-    </div>
+            </ul>
 
-    <div class="tabla-cardE">
-        <table>
-            <thead>
-                <tr>
-                    <th>Documento</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Fecha Nacimiento</th>
-                    <th>Activo</th>
-                </tr>
-            </thead>
-              <tbody id = "tbodyEstudiantes"> </tbody>
-        </table>
 
-        <div class="footer-tabla">
-            <span class="badge-registros">0 registro(s)</span>
-            <div class="paginacion">
-                <button disabled>← Ant</button>
-                <span>1/1</span>
-                <button disabled>Sig →</button>
+        </nav>
+
+
+        <main>
+            <div class="contenedor-cursos">
+                <div class="header-seccion">
+                    <h2>Estudiantes</h2>
+                    <div class="boton-nuevo">
+                        <a href="estudiantes-nuevo.html" class="btn btn-secondary">+Nuevo Estudiante</a>
+                    </div>
+
+                </div>
+
+                <div class="filtros-cursos">
+                    <div class="input-busqueda">
+                        <input type="text" placeholder="Buscar por Estudiante">
+                    </div>
+                    <select class="select-filtro">
+                        <option>Activos</option>
+                        <option>Inactivos</option>
+
+                    </select>
+                    <select class="select-filtro">
+                        <option>Todas las inscripciones</option>
+                        <option>En proceso</option>
+                        <option>Completadas</option>
+                    </select>
+                </div>
+
+                <div class="tabla-cardE">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Email</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Activo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyEstudiantes"> </tbody>
+                    </table>
+
+                    <div class="footer-tabla">
+                        <span class="badge-registros">0 registro(s)</span>
+                        <div class="paginacion">
+                            <button disabled>← Ant</button>
+                            <span>1/1</span>
+                            <button disabled>Sig →</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </main>
     </div>
-</div>
-    
-</main>
-    </div>
-    
-<footer>
+
+    <footer>
         <p>&copy; 2026 Prog4202601_O . All rights reserved.</p>
-    </footer>    
+    </footer>
 </body>

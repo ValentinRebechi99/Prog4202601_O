@@ -1,3 +1,8 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 header {
     display: flex;
     flex-direction: row;
@@ -8,9 +13,7 @@ header {
 
 header div.contenedor {
     display: flex;
-
     width: 100vw;
-
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
@@ -28,19 +31,17 @@ body {
 div.contenedor-principal {
     display: flex;
     width: 100vw;
-    min-height: 100vh;
-
+    height: 100%;
     margin: auto;
-
     flex-direction: row;
     justify-content: flex-start;
-
+    
 }
 
 
 nav {
 
-    background-color: #021f33;
+    background-color: #06304e;
 
 }
 
@@ -58,6 +59,7 @@ nav ul li a:hover {
     color: white;
     font-size: 1.5em;
     text-decoration: none;
+    padding: 0.2rem;
 }
 
 nav li a {
@@ -76,6 +78,8 @@ main.nuevo-boton {
 }
 
 footer {
+    
     background-color: #06304e;
     color: white
+    
 }
