@@ -3,9 +3,23 @@ import CursosEstados from "./cursos_estados.js"
 
 class Curso {
     findall = async () => {
-        let strSql = 'SELECT * FROM public.cursos'
-        const {rows} = await conexion.query(strSql);
-        return rows;
+        const strSql = `
+        SELECT 
+            id_curso,
+            nombre,
+            descripcion,
+            fecha_inicio,
+            cantidad_horas,
+            inscriptos_max,
+            id_curso_estado
+        FROM public.cursos
+    `;
+
+    const { rows } = await conexion.query(strSql);
+
+    return rows;
+
+        
     }
 
     findById = async (cursoId) => {

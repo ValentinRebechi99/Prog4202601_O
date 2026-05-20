@@ -2,7 +2,7 @@ const cargarCursos = async () => {
 
     try {
 
-        const respuesta = await fetch("./js/cursos.json");
+        const respuesta = await fetch("http://localhost:3000/cursos");
 
         if (!respuesta.ok) {
             throw new Error("No se pudo cargar el archivo JSON");
@@ -19,14 +19,15 @@ const cargarCursos = async () => {
             const fila = document.createElement("tr");
 
             fila.innerHTML = `
-                <td>${curso.idCurso}</td>
+                <td>${curso.id_curso}</td>
                 <td>${curso.nombre}</td>
                 <td>${curso.descripcion}</td>
-                <td>${new Date(curso.fechaInicio).toLocaleDateString()}</td>
-                <td>${curso.cantidadHoras}</td>
-                <td>${curso.inscriptosMax}</td>
-                <td>${curso.estado}</td>
-            `;
+                <td>${new Date(curso.fecha_inicio).toLocaleDateString()}</td>
+                <td>${curso.cantidad_horas}</td>
+                <td>${curso.inscriptos_max}</td>
+                <td>${curso.id_curso_estado}</td>
+
+                        `;
 
             tabla.appendChild(fila);
 
