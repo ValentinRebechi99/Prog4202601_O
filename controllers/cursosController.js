@@ -30,21 +30,25 @@ class CursosController{
     }
 
     create = async (req, res) => {
-        const { body } = req;
-        //nombre,descripcion,fecha_inicio,cantidad_horas,inscriptos_maximos,id_usuario_modificacion,fecha_modificacion
-        //fechas en YYYY-MM-DD
-        if (!body.nombre || !body.descripcion || !body.fecha_inicio || !body.cantidad_horas || !body.inscriptos_maximos){
-            res
-                .status(404)
-                .send({
+        try {
+            const { body } = req;
+            if (!body) {
+                return res.status(400).send({ status: "Fallo", data: { error: "No se enviaron datos en el cuerpo de la petición." } });
+            }
+            if (!body.nombre || !body.descripcion || !body.fecha_inicio || !body.cantidad_horas || !body.inscriptos_maximos) {
+                return res.status(400).send({
                     status: "Fallo",
-                    data: {
-                        error: "Faltan datos para poder crear el curso"
-                    }
+                    data: { error: "Faltan datos para poder crear el curso" }
                 });
+            }
+
+            const data = await this.database.create(body.nombre, body.descripcion, body.fecha_inicio, body.cantidad_horas, body.inscriptos_maximos, 1);
+            return res.status(201).send(data);
+
+        } catch (error) {
+            console.error("Error en el controlador (create):", error);
+            return res.status(500).json({ error: "Error interno del servidor" });
         }
-        const data = await this.database.create(body.nombre, body.descripcion, body.fecha_inicio, body.cantidad_horas, body.inscriptos_maximos,0);
-        res.send(data);
     }
 
     update = async (req, res) => {
@@ -60,16 +64,19 @@ class CursosController{
                     }
                 });
         }
-        const data = await this.database.update(Curso_id, body.nombre, body.descripcion, body.fecha_inicio, body.cantidad_horas, body.inscriptos_maximos, body.id_curso_estado, 0);
+        const data = await this.database.update(Curso_id, body.nombre, body.descripcion, body.fecha_inicio, body.cantidad_horas, body.inscriptos_maximos, body.id_curso_estado, 1);
         res.send(data);
     }
 
     destroy = async (req, res) => {
+
+        // arreglar esto
         const Curso_id = req.params.cursoId;
         if(!Curso_id) {
             res.status(404).send({ status: "Fallo", data: { error: "El parámetro CursoID no puede ser vacío." } });
         }
-        const data = await this.database.destroy(Curso_id);
+        console.log(Curso_id)
+        const data = await this.database.destroy(parseInt(Curso_id));
         res.send(data);
     }
 }
