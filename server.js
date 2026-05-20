@@ -1,3 +1,7 @@
+import express from "express";
+import cors from "cors";
+import { router as v1RouterCursos } from "./routes/v1/cursosRoutes.js";
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -6,6 +10,9 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static(__dirname)); 
+
+app.use(cors());
+app.use("/routes/v1", v1RouterCursos);
 
 
 const rutaArchivo = path.join(__dirname, 'estudiantes.json');
