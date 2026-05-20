@@ -50,3 +50,6 @@ const cargarCursos = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", cargarCursos);
+
+
+

@@ -28,14 +28,14 @@ class Curso {
         return rows;
     }
 
-    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_usuario_modificacion) => {
+    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_usuario_modificacion) => {
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         
         const id_estado = (await CursosEstados().create())[0].id_curso_estado; 
     
         const strSql = `
             INSERT INTO public.cursos 
-            (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max_1, id_curso_estado, id_usuario_modificacion, fecha_hora_modificacion) 
+            (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion, fecha_hora_modificacion) 
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING id_curso;
         `;
@@ -45,7 +45,7 @@ class Curso {
             descripcion, 
             fecha_inicio, 
             cantidad_horas, 
-            inscriptos_maximos, 
+            inscriptos_max, 
             id_estado, 
             id_usuario_modificacion, 
             fecha_modificacion
@@ -54,10 +54,12 @@ class Curso {
         const { rows } = await conexion.query(strSql, parametros);
         const nuevoId = rows[0].id_curso;
     
-        return findById(nuevoId);
+        return this.findById(nuevoId);
     }
 
-    update = async (cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_curso_estado, id_usuario_modificacion) => {
+    
+
+    update = async (cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion) => {
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         
         const strSql = `
@@ -71,7 +73,7 @@ class Curso {
             descripcion, 
             fecha_inicio, 
             cantidad_horas, 
-            inscriptos_maximos, 
+            inscriptos_max, 
             id_curso_estado, 
             id_usuario_modificacion, 
             fecha_modificacion,
