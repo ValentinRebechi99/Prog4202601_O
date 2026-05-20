@@ -42,6 +42,7 @@ app.post('/api/guardar-estudiante', (req, res) => {
     });
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(3000, () => {
     console.log('Servidor corriendo en http://localhost:3000');
