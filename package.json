@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ValentinRebechi99/Prog4202601_O#readme",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "pg": "^8.21.0"
   }
