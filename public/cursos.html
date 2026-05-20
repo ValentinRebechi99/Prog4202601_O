@@ -17,7 +17,7 @@
     <header>
         <div class="contenedor">
             <h1>Cursos FCAD- UNER</h1>
-            <img src="img/logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
+            <img src="../img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
         </div>
     </header>
     <div class="contenedor-principal ">
@@ -39,53 +39,59 @@
             <div class="contenedor-cursos">
                 <div class="header-seccion">
                     <h2>Cursos</h2>
+                    <div class="boton-mod">
+                        <a href="cursos-mod.html" class="btn btn-secondary">+Modificar Curso</a>
+                    </div>
                     <div class="boton-nuevo">
                         <a href="cursos-nuevo.html" class="btn btn-secondary">+Nuevo Curso</a>
                     </div>
+                    
+                    
                 </div>
 
-                <div class="filtros-cursos">
-                    <div class="input-busqueda">
-                        <input type="text" placeholder="Buscar por curso ">
+
+                    <div class="filtros-cursos">
+                        <div class="input-busqueda">
+                            <input type="text" placeholder="Buscar por curso ">
+                        </div>
+                        <select class="select-filtro">
+                            <option>Por iniciar</option>
+                            <option>En Curso</option>
+                            <option>Sin Cupo</option>
+
+                        </select>
+
                     </div>
-                    <select class="select-filtro">
-                        <option>Por iniciar</option>
-                        <option>En Curso</option>
-                        <option>Sin Cupo</option>
 
-                    </select>
+                    <div class="tabla-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Curso</th>
+                                    <th>Descripcion</th>
+                                    <th>Fecha Inicio</th>
+                                    <th>Cantidad de horas</th>
+                                    <th>Maximo Inscriptos</th>
+                                    <th>Estado</th>
 
-                </div>
-
-                <div class="tabla-card">
-                    <table>
-                        <thead>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"> </tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Curso</th>
-                                <th>Descripcion</th>
-                                <th>Fecha Inicio</th>
-                                <th>Cantidad de horas</th>
-                                <th>Maximo Inscriptos</th>
-                                <th>Estado</th>
-
                             </tr>
-                        </thead>
-                        <tbody id="tbody"> </tbody>
-                        <tr>
-                        </tr>
 
-                    </table>
+                        </table>
 
-                    <div class="footer-tabla">
-                        <span class="badge-registros">x Registros</span>
-                        <div class="paginacion">
-                            <button disabled>← Ant</button>
-                            <span>1/1</span>
-                            <button disabled>Sig →</button>
+                        <div class="footer-tabla">
+                            <span class="badge-registros">x Registros</span>
+                            <div class="paginacion">
+                                <button disabled>← Ant</button>
+                                <span>1/1</span>
+                                <button disabled>Sig →</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
         </main>
     </div>
