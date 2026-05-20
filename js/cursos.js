@@ -26,6 +26,11 @@ const cargarCursos = async () => {
                 <td>${curso.cantidad_horas}</td>
                 <td>${curso.inscriptos_max}</td>
                 <td>${curso.id_curso_estado}</td>
+                <td>
+                    <div class="boton-mod">
+                        <a href="cursos-mod.html" class="btn btn-secondary">+Modificar Curso</a>
+                    </div>
+                </td>
 
                         `;
 
