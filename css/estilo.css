@@ -16,7 +16,7 @@ header div.contenedor {
     width: 100vw;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
+    align-items: center ;
 }
 
 header h1 {
@@ -82,4 +82,10 @@ footer {
     background-color: #06304e;
     color: white
     
+}
+#formCurso{
+  
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 2rem;
 }
