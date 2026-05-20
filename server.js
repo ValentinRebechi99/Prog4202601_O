@@ -1,8 +1,6 @@
-import express from "express";
-import cors from "cors";
-import { router as v1RouterCursos } from "./routes/v1/cursosRoutes.js";
-
+const { router: v1RouterCursos } = require("./routes/v1/cursosRoutes.mjs");
 const express = require('express');
+const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const app = express();
