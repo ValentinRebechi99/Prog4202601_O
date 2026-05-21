@@ -13,7 +13,7 @@ const iniciar = () => {
             estado: document.getElementById("estado").value
         };
 try {
-
+            console.log(datos);
             const respuesta = await fetch("http://localhost:3000/cursos",
                 {
                     method: "POST",
@@ -27,7 +27,7 @@ try {
                 }
                 
             );
-
+                console.log(datos);
             if (!respuesta.ok) {
                 throw new Error("Error al guardar");
             }
