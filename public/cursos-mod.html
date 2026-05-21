@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="../css/estilo.css">
      <link rel="stylesheet" href="../css/bootstrap.min.css">
      <link rel="stylesheet" href="../css/bootstrap-reboot.min.css">
-     <script src="../js/cursos.js" type="module" defer></script>
-     <script src="js/cursos-nuevo.js" type="module" defer></script>
+     
+     
+     <script src="js/cursos-mod.js" type="module" defer></script>
     </head>
 <body>
 
@@ -34,7 +35,7 @@
        
  <main>
    
-        <h2 id="formCurso">Modificar Curso</h2>
+        <h2>Modificar Curso</h2>
         <form id="formCurso">
             <div class="form-group">
                 <label for="nombre">Nombre del Curso:</label>
@@ -58,13 +59,20 @@
             </div>
              <div class="form-group">
                 <label for="estado">Estado:</label>
+
                 <select id="estado" class="form-control">
-                    <option value="Por Iniciar">Por Iniciar</option>
-                    <option value="En Curso">En Curso</option>
-                    <option value="Borrador">Sin Cupo</option>
+
+                    <option value="1">BORRADOR</option>
+
+                    <option value="2">INSCRIPCIÓN ABIERTA</option>
+
+                    <option value="3">INSCRIPCIÓN CERRADA</option>
+
+                    <option value="4">ELIMINADO</option>
+
                 </select>
             </div>
-            <button type="click" id="btnGuardarCurso" class="btn btn-primary">Guardar Curso</button>
+            <button type="submit" id="btnGuardarCurso" class="btn btn-primary">Guardar Curso</button>
         </form>
 </main>
     </div>
