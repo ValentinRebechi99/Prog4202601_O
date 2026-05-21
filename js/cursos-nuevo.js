@@ -37,7 +37,6 @@ try {
 
             alert("Curso guardado correctamente");
 
-//            document.getElementById("formCurso").reset();
 
         } catch (error) {
 
