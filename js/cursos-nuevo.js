@@ -37,7 +37,7 @@ try {
 
             alert("Curso guardado correctamente");
 
-//            document.getElementById("formCurso").reset();
+           window.location.href="http://localhost:3000/cursos.html";
 
         } catch (error) {
 
@@ -47,9 +47,6 @@ try {
         }
         console.log(obj);
 
-
-
-        
     });
 };
 document.addEventListener("DOMContentLoaded", iniciar);
