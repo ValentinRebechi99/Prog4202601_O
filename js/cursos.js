@@ -19,14 +19,14 @@ const cargarCursos = async () => {
             const fila = document.createElement("tr");
 
             fila.innerHTML = `
-                <td>${curso.id_curso}</td>
-                <td>${curso.nombre}</td>
-                <td>${curso.descripcion}</td>
-                <td>${new Date(curso.fecha_inicio).toLocaleDateString()}</td>
-                <td>${curso.cantidad_horas}</td>
-                <td>${curso.inscriptos_max}</td>
-                <td>${curso.id_curso_estado}</td>
-                <td>
+                <td id="elementos">${curso.id_curso}</td>
+                <td id="elementos">${curso.nombre}</td>
+                <td id="elementos">${curso.descripcion}</td>
+                <td id="elementos">${new Date(curso.fecha_inicio).toLocaleDateString()}</td>
+                <td id="elementos">${curso.cantidad_horas}</td>
+                <td id="elementos">${curso.inscriptos_max}</td>
+                <td id="elementos">${curso.id_curso_estado}</td>
+                <td id="elementos"> 
                     <div class="boton-mod">
                         <a href="cursos-mod.html" class="btn btn-secondary">+Modificar Curso</a>
                     </div>

@@ -89,3 +89,9 @@ footer {
     justify-content: space-around;
     padding-left: 2rem;
 }
+
+#elementos{
+    
+    padding-left:  1rem;
+    align-items: center;
+}
