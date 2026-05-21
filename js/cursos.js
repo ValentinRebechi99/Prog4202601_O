@@ -25,7 +25,7 @@ const cargarCursos = async () => {
                 <td id="elementos">${new Date(curso.fecha_inicio).toLocaleDateString()}</td>
                 <td id="elementos">${curso.cantidad_horas}</td>
                 <td id="elementos">${curso.inscriptos_max}</td>
-                <td id="elementos">${curso.id_curso_estado}</td>
+                <td id="elementos">${curso.estado}</td>
                 <td id="elementos"> 
                     <div class="boton-mod">
                         <a href="cursos-mod.html" class="btn btn-secondary">+Modificar Curso</a>
