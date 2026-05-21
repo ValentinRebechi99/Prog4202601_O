@@ -9,11 +9,10 @@ const iniciar = () => {
             descripcion: document.getElementById("descripcion").value,
             fecha_inicio: document.getElementById("fechaInicio").value,
             cantidad_horas: document.getElementById("cantidadHoras").value,
-            inscriptos_maximos: document.getElementById("cantidadInscriptos").value,
-            estado: document.getElementById("estado").value
+            inscriptos_maximos: document.getElementById("cantidadInscriptos").value
         };
 try {
-            console.log(datos);
+            
             const respuesta = await fetch("http://localhost:3000/cursos",
                 {
                     method: "POST",
@@ -27,7 +26,7 @@ try {
                 }
                 
             );
-                console.log(datos);
+                
             if (!respuesta.ok) {
                 throw new Error("Error al guardar");
             }
