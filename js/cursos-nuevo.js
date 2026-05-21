@@ -37,6 +37,7 @@ try {
 
             alert("Curso guardado correctamente");
 
+           window.location.href="http://localhost:3000/cursos.html";
 
         } catch (error) {
 
@@ -46,9 +47,6 @@ try {
         }
         console.log(obj);
 
-
-
-        
     });
 };
 document.addEventListener("DOMContentLoaded", iniciar);
