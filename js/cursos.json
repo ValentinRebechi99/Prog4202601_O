@@ -1,7 +1,7 @@
 [
     {
         "idCurso": 1,
-        "nombre": "Programación Web con React",
+        "nombre": "Programación Web con React y angular para novatos",
         "descripcion": "Desarrollo de aplicaciones web modernas utilizando JavaScript, React y consumo de APIs REST.",
         "fechaInicio": "2026-04-20T03:00:00.000Z",
         "cantidadHoras": 60,

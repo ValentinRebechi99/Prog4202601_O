@@ -47,7 +47,9 @@ class Curso {
         }
     }
 
-    update = async (cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_curso_estado, id_usuario_modificacion) => {
+    
+
+    update = async (cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion) => {
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         
         const strSql = `
@@ -61,7 +63,7 @@ class Curso {
             descripcion, 
             fecha_inicio, 
             cantidad_horas, 
-            inscriptos_maximos, 
+            inscriptos_max, 
             id_curso_estado, 
             id_usuario_modificacion, 
             fecha_modificacion,
