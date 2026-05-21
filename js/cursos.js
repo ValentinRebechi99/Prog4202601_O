@@ -1,7 +1,6 @@
 const cargarCursos = async () => {
 
     try {
-
         const respuesta = await fetch("http://localhost:3000/cursos");
 
         if (!respuesta.ok) {
@@ -28,7 +27,7 @@ const cargarCursos = async () => {
                 <td id="elementos">${curso.estado}</td>
                 <td id="elementos"> 
                     <div class="boton-mod">
-                        <a href="cursos-mod.html" class="btn btn-secondary">+Modificar Curso</a>
+                        <a href="cursos-mod.html#${curso.id_curso}" class="btn btn-secondary">+Modificar Curso</a>
                     </div>
                 </td>
 
