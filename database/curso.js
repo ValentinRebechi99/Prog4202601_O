@@ -2,59 +2,49 @@ import conexion from "./conexion.js"
 import CursosEstados from "./cursos_estados.js"
 
 class Curso {
+    constructor() {
+        this.estados = new CursosEstados();
+    }
     findall = async () => {
-        const strSql = `
-        SELECT 
-            id_curso,
-            nombre,
-            descripcion,
-            fecha_inicio,
-            cantidad_horas,
-            inscriptos_max,
-            id_curso_estado
-        FROM public.cursos
-    `;
-
-    const { rows } = await conexion.query(strSql);
-
-    return rows;
-
-        
+        let strSql = 'select c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion ,ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado;'
+        const {rows} = await conexion.query(strSql);
+        return rows;
     }
 
     findById = async (cursoId) => {
-        const strSql = 'SELECT * FROM public.cursos WHERE id_curso = $1';
+        const strSql = 'select c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion ,ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado where c.id_curso = $1;';
         const {rows} = await conexion.query(strSql,[cursoId]);
         return rows;
     }
 
-    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_usuario_modificacion) => {
-        const fecha_modificacion = new Date().toISOString().split('T')[0];
-        
-        const id_estado = (await CursosEstados().create())[0].id_curso_estado; 
-    
+    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_usuario_modificacion) => {
+        const fecha_modificacion = new Date().toISOString().split('T')[0]; 
         const strSql = `
             INSERT INTO public.cursos 
             (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion, fecha_hora_modificacion) 
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING id_curso;
         `;
-    
-        const parametros = [
-            nombre, 
-            descripcion, 
-            fecha_inicio, 
-            cantidad_horas, 
-            inscriptos_max, 
-            id_estado, 
-            id_usuario_modificacion, 
-            fecha_modificacion
-        ];
-    
-        const { rows } = await conexion.query(strSql, parametros);
-        const nuevoId = rows[0].id_curso;
-    
-        return this.findById(nuevoId);
+        try{
+            const parametros = [
+                nombre, 
+                descripcion, 
+                fecha_inicio, 
+                cantidad_horas, 
+                inscriptos_maximos, 
+                1, 
+                id_usuario_modificacion, 
+                fecha_modificacion
+            ];
+        
+            const { rows } = await conexion.query(strSql, parametros);
+            const nuevoId = rows[0].id_curso;
+            const response = await this.findById(nuevoId);
+            return response;
+        }
+        catch(error) {
+            console.error("Error en el controlador (create):", error);
+        }
     }
 
     
@@ -80,23 +70,31 @@ class Curso {
             cursoId
         ];
     
-        await conexion.query(strSql, parametros);
-        return findById(cursoId);
+        const { rows } = await conexion.query(strSql, parametros);
+
+        return rows;
     }
 
     destroy = async (cursoId) => {
-        destroy = async (cursoId) => {
-            const curso = await this.findById(cursoId); 
-            
-            if (!curso) {
-                return null;
-            }
         
-            const estado_id = curso.id_curso_estado;
-            await CursosEstados.update(cursoId, estado_id); 
-            
+        const strSql = 'SELECT c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion, ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado WHERE c.id_curso = $1;';
+        const { rows } = await conexion.query(strSql, [cursoId]);
+        const curso = rows[0]; 
+        if (!curso) {
+            console.error("no hay curso");
             return null;
         }
+        const { rows: rowsUpdate } = await this.update(
+            curso.id_curso,
+            curso.nombre,
+            curso.descripcion,
+            curso.fecha_inicio,
+            curso.cantidad_horas,
+            curso.inscriptos_max,
+            4,
+            1
+        );
+        return rowsUpdate;
     }
 
 }
