@@ -6,7 +6,7 @@ class Curso {
         this.estados = new CursosEstados();
     }
     findall = async () => {
-        let strSql = 'select c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion ,ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado;'
+        let strSql = 'select c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion ,ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado where c.id_curso_estado != 4;'
         const {rows} = await conexion.query(strSql);
         return rows;
     }
