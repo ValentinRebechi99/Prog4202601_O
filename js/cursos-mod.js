@@ -40,7 +40,6 @@ const cargarCurso = async () => {
             case "BORRADOR":
                 document.getElementById("estado").value = "1";
                 break;
-
             case "INSCRIPCIÓN ABIERTA":
                 document.getElementById("estado").value = "2";
                 break;

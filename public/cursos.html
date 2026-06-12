@@ -47,18 +47,35 @@
 
                 </div>
                 <div class="filtros-cursos">
-                    <div class="input-busqueda">
-                        <input type="text" placeholder="Buscar por curso ">
-                    </div>
-                    <select class="select-filtro">
-                        <option>Por iniciar</option>
-                        <option>En Curso</option>
-                        <option>Sin Cupo</option>
 
-                    </select>
+    <div class="input-busqueda">
+
+        <input type="text" id="buscarCurso" placeholder="Buscar por curso">
 
                 </div>
+                
+                <select id="estado" class="form-control">
+                
+                
+                
+                    <option value="BORRADOR">BORRADOR</option>
+                
+                    <option value="INSCRIPCIÓN ABIERTA">
+                        INSCRIPCIÓN ABIERTA
+                    </option>
+                
+                    <option value="INSCRIPCIÓN CERRADA">
+                        INSCRIPCIÓN CERRADA
+                    </option>
+                
+                    <option value="ELIMINADO">
+                        ELIMINADO
+                    </option>
+                
+                </select>
+                </div>
 
+                </div>
                 <div class="tabla-card">
                     <table>
                         <thead>

@@ -9,8 +9,6 @@ const cargarCursos = async () => {
 
         const datos = await respuesta.json();
 
-        console.log(datos);
-
         const tabla = document.getElementById("tbody");
 
         datos.forEach(curso => {

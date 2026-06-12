@@ -17,4 +17,5 @@ const iniciar = () => {
 
     });
 };
+
 document.addEventListener("DOMContentLoaded", iniciar);
