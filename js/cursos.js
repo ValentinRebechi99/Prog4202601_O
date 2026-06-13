@@ -26,12 +26,51 @@ const cargarCursos = async () => {
                 <td id="elementos"> 
                     <div class="boton-mod">
                         <a href="cursos-mod.html#${curso.id_curso}" class="btn btn-secondary">+Modificar Curso</a>
+                        <button class="btn btn-danger btn-eliminar"  data-id="${curso.id_curso}"> Eliminar Curso </button>
                     </div>
                 </td>
 
                         `;
 
             tabla.appendChild(fila);
+
+            
+            fila.querySelector(".btn-eliminar")
+                .addEventListener("click", async () => {
+
+                    const confirmar = confirm(
+                        "¿Desea eliminar este curso?"
+                    );
+
+                    if (!confirmar) return;
+
+                    try {
+
+                        const respuesta = await fetch(
+                            `http://localhost:3000/cursos/${curso.id_curso}`,
+                            {
+                                method: "DELETE"
+                            }
+                        );
+
+                        if (!respuesta.ok) {
+                            throw new Error();
+                        }
+
+                        alert("Curso eliminado");
+
+                        fila.remove();
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        alert("Error al eliminar");
+
+                    }
+
+                });
+
 
         });
 
