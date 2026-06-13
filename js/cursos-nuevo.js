@@ -9,10 +9,13 @@ const iniciar = () => {
             descripcion: document.getElementById("descripcion").value,
             fecha_inicio: document.getElementById("fechaInicio").value,
             cantidad_horas: document.getElementById("cantidadHoras").value,
-            inscriptos_maximos: document.getElementById("cantidadInscriptos").value
+            inscriptos_maximos: document.getElementById("cantidadInscriptos").value,
+            id_curso_estado: parseInt(
+                document.getElementById("estado").value
+            )
         };
-try {
-            
+        try {
+
             const respuesta = await fetch("http://localhost:3000/cursos",
                 {
                     method: "POST",
@@ -22,11 +25,11 @@ try {
                     },
 
                     body: JSON.stringify(obj)
-                    
+
                 }
-                
+
             );
-                
+
             if (!respuesta.ok) {
                 throw new Error("Error al guardar");
             }
@@ -37,7 +40,7 @@ try {
 
             alert("Curso guardado correctamente");
 
-           window.location.href="http://localhost:3000/cursos.html";
+            window.location.href = "http://localhost:3000/cursos.html";
 
         } catch (error) {
 

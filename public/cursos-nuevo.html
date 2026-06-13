@@ -1,70 +1,79 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevo Curso - FCAD- UNER</title>
     <link rel="stylesheet" href="../css/estilo.css">
-     <link rel="stylesheet" href="../css/bootstrap.min.css">
-     <link rel="stylesheet" href="../css/bootstrap-reboot.min.css">
-     <script src="../js/cursos.js" type="module" defer></script>
-     <script src="js/cursos-nuevo.js" type="module" defer></script>
-    </head>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-reboot.min.css">
+    <script src="../js/cursos.js" type="module" defer></script>
+    <script src="js/cursos-nuevo.js" type="module" defer></script>
+</head>
+
 <body>
 
     <header>
         <div class="contenedor">
-             <h1>Nuevo Curso - FCAD- UNER</h1>
-            <img src="../img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración"> 
+            <h1>Nuevo Curso - FCAD- UNER</h1>
+            <img src="../img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
         </div>
     </header>
     <div class="contenedor-principal ">
         <nav>
             <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="cursos.html">Cursos</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="estudiantes.html">Estudiantes</a></li>
-               
-              </ul>
-    
-        
-         </nav>
-   
-       
- <main>
-   
-        <h2 id="formCurso">Crear Nuevo Curso</h2>
-        <form id="formCurso">
-            <div class="form-group">
-                <label for="nombre">Nombre del Curso:</label>
-                <input type="text" id="nombre" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" class="form-control" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="fechaInicio">Fecha de Inicio:</label>
-                <input type="date" id="fechaInicio" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="cantidadHoras">Cantidad de Horas:</label>
-                <input type="number" id="cantidadHoras" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="cantidadInscriptos">Cantidad de Inscriptos:</label>
-                <input type="number" id="cantidadInscriptos" class="form-control" required>
-            </div>
-             <div class="form-group">
-                <label for="estado">Estado:</label>
-                
-            </div>
-            <button type="submit" id="btnGuardarCurso" class="btn btn-primary">Guardar Curso</button>
-        </form>
-</main>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+
+            </ul>
+
+
+        </nav>
+
+
+        <main>
+
+            <h2 id="formCurso">Crear Nuevo Curso</h2>
+            <form id="formCurso">
+                <div class="form-group">
+                    <label for="nombre">Nombre del Curso:</label>
+                    <input type="text" id="nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="fechaInicio">Fecha de Inicio:</label>
+                    <input type="date" id="fechaInicio" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="cantidadHoras">Cantidad de Horas:</label>
+                    <input type="number" id="cantidadHoras" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="cantidadInscriptos">Cantidad de Inscriptos:</label>
+                    <input type="number" id="cantidadInscriptos" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="estado">Estado:</label>
+
+                        <select id="estado" class="form-control">
+                            <option value="1">BORRADOR</option>
+                            <option value="2">INSCRIPCIÓN ABIERTA</option>
+                            <option value="3">INSCRIPCIÓN CERRADA</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" id="btnGuardarCurso" class="btn btn-primary">Guardar Curso</button>
+            </form>
+        </main>
     </div>
-<footer>
+    <footer>
         <p>&copy; 2026 Prog4202601_O . All rights reserved.</p>
-    </footer>    
+    </footer>
 </body>

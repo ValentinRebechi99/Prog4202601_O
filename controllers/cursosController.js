@@ -1,6 +1,6 @@
 import Curso from "../database/curso.js";
 
-class CursosController{
+class CursosController {
     constructor() {
         this.database = new Curso();
     }
@@ -10,7 +10,7 @@ class CursosController{
             const data = await this.database.findall();
             res.send(data);
         }
-        catch(exc){
+        catch (exc) {
             throw exc;
         }
     }
@@ -18,13 +18,13 @@ class CursosController{
     findById = async (req, res) => {
         try {
             const Curso_id = req.params.cursoId;
-            if(!Curso_id) {
+            if (!Curso_id) {
                 res.status(404).send({ status: "Fallo", data: { error: "El parámetro CursoID no puede ser vacío." } });
             }
             const data = await this.database.findById(parseInt(Curso_id));
             res.send(data);
         }
-        catch(exc){
+        catch (exc) {
             throw exc;
         }
     }
@@ -42,8 +42,15 @@ class CursosController{
                 });
             }
 
-            const data = await this.database.create(body.nombre, body.descripcion, body.fecha_inicio, body.cantidad_horas, body.inscriptos_maximos, 1);
-            return res.status(201).send(data);
+            const data = await this.database.create(
+                body.nombre,
+                body.descripcion,
+                body.fecha_inicio,
+                body.cantidad_horas,
+                body.inscriptos_maximos,
+                body.id_curso_estado,
+                1
+            ); return res.status(201).send(data);
 
         } catch (error) {
             console.error("Error en el controlador (create):", error);
@@ -54,7 +61,7 @@ class CursosController{
     update = async (req, res) => {
         const { body } = req;
         const Curso_id = req.params.cursoId;
-        if (!Curso_id || !body.nombre || !body.descripcion || !body.fecha_inicio || !body.cantidad_horas || !body.inscriptos_maximos || !body.id_curso_estado){
+        if (!Curso_id || !body.nombre || !body.descripcion || !body.fecha_inicio || !body.cantidad_horas || !body.inscriptos_maximos || !body.id_curso_estado) {
             res
                 .status(404)
                 .send({
@@ -72,7 +79,7 @@ class CursosController{
 
         // arreglar esto
         const Curso_id = req.params.cursoId;
-        if(!Curso_id) {
+        if (!Curso_id) {
             res.status(404).send({ status: "Fallo", data: { error: "El parámetro CursoID no puede ser vacío." } });
         }
         console.log(Curso_id)

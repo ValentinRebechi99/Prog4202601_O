@@ -13,7 +13,7 @@ const cargarCursos = async () => {
         }
 
         cursos = await respuesta.json();
-
+        console.log(cursos);
         mostrarCursos(cursos);
 
     } catch (error) {
@@ -27,14 +27,14 @@ const cargarCursos = async () => {
 
 const filtrarCursos = () => {
 
-    const idBuscado =
-        document.getElementById("buscarCurso")
-            .value
-            .trim();
+    const buscar = document.getElementById("buscarCurso");
+
+    const idBuscado = buscar
+        ? buscar.value.trim()
+        : "";
 
     const estadoBuscado =
-        document.getElementById("estado")
-            .value;
+        document.getElementById("estado").value;
 
     const filtrados = cursos.filter(curso => {
 
@@ -46,7 +46,8 @@ const filtrarCursos = () => {
 
         const coincideEstado =
             estadoBuscado === "" ||
-            curso.estado === estadoBuscado;
+            (curso.id_curso_estado &&
+                curso.id_curso_estado.toString() === estadoBuscado);
 
         return coincideId && coincideEstado;
     });
