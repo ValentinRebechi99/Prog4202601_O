@@ -1,6 +1,6 @@
 import CursoService from "../services/curso.service.js";
 
-class CursosController{
+class CursosController {
     constructor() {
         this.servicio = new CursoService();
     }
@@ -46,8 +46,15 @@ class CursosController{
                 });
             }
 
-            const data = await this.servicio.create(body.nombre, body.descripcion, body.fecha_inicio, body.cantidad_horas, body.inscriptos_maximos, 1);
-            return res.status(201).send(data);
+            const data = await this.database.create(
+                body.nombre,
+                body.descripcion,
+                body.fecha_inicio,
+                body.cantidad_horas,
+                body.inscriptos_maximos,
+                body.id_curso_estado,
+                1
+            ); return res.status(201).send(data);
 
         } catch (error) {
             console.error("Error en el controlador (create):", error);
