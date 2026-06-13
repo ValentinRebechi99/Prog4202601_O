@@ -1,6 +1,6 @@
 const cargarEstudiantes = async () => {
     try {
-        const respuesta = await fetch("js/estudiantes.json");
+        const respuesta = await fetch("./estudiantes.json");
         const datos = await respuesta.json();
 
         const tabla = document.getElementById("tbodyEstudiantes");
