@@ -1,7 +1,4 @@
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
-dotenv.config('../.env');
 
 const pool = new Pool({
     user: process.env.PGUSER,
@@ -11,6 +8,8 @@ const pool = new Pool({
     port: process.env.PGPORT,
 });
 
-const conexion = await pool.connect();
-
-export default conexion;
+export default class conexion{
+    static async createConnection(){
+        return await pool.connect();
+    }
+}

@@ -4,6 +4,7 @@
   "description": "Repositorio del Integrador de Programación 4",
   "main": "server.js",
   "scripts": {
+    "start": "node --env-file=.env server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
