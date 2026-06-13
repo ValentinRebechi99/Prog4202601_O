@@ -35,20 +35,20 @@ export default class CursoService extends BaseService {
         return respuesta;
     }
 
-    async create(nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_usuario_modificacion){
-        const respuestaBD = await this.repository.create(nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_usuario_modificacion);
+    async create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos, idUsuarioModificacion=2){
+        const respuestaBD = await this.repository.create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos, idUsuarioModificacion);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
     }
 
-    async update(cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion){
-        const respuestaBD = await this.respuesta.update(cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion);
+    async update(cursoId, nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMax, idCursoEstado, idUsuarioModificacion=2){
+        const respuestaBD = await this.repository.update(cursoId, nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMax, idCursoEstado, idUsuarioModificacion);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
     }
 
     async delete(cursoID){
-        const respuestaBD = await this.respuesta.destroy(cursoID);
+        const respuestaBD = await this.repository.destroy(cursoID);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
     }

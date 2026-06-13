@@ -22,16 +22,16 @@ const cargarCurso = async () => {
             curso.descripcion;
 
         document.getElementById("fechaInicio").value =
-            curso.fecha_inicio.split("T")[0];
+            curso.fechaInicio.split("T")[0];
 
         document.getElementById("cantidadHoras").value =
-            curso.cantidad_horas;
+            curso.cantidadHoras;
 
         document.getElementById("cantidadInscriptos").value =
-            curso.inscriptos_max;
+            curso.inscriptosMax;
 
         document.getElementById("estado").value =
-            curso.id_curso_estado;
+            curso.estado;
 
     } catch (error) {
 
@@ -60,17 +60,18 @@ const iniciar = () => {
             descripcion:
                 document.getElementById("descripcion").value,
 
-            fecha_inicio:
+            fechaInicio:
                 document.getElementById("fechaInicio").value,
 
-            cantidad_horas:
+            cantidadHoras:
                 parseInt(document.getElementById("cantidadHoras").value),
 
-            inscriptos_maximos:
+            inscriptosMaximos:
                 parseInt(document.getElementById("cantidadInscriptos").value),
 
-            id_curso_estado:
-                parseInt(document.getElementById("estado").value)
+            idCursoEstado:
+                parseInt(document.getElementById("estado").value),
+            
         };
 
         try {

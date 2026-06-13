@@ -104,6 +104,7 @@ export default class CursoRepository {
 
 
     update = async (cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion) => {
+        const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         const strSql = `
             UPDATE public.cursos 
@@ -123,21 +124,21 @@ export default class CursoRepository {
             cursoId
         ];
 
-        const { rows } = await conexion.query(strSql, parametros);
-
+        const { rows } = await client.query(strSql, parametros);
+        client.release();
         return rows;
     }
 
     destroy = async (cursoId) => {
-
+        const client = await conexion.createConnection()
         const strSql = 'SELECT c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion, ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado WHERE c.id_curso = $1;';
-        const { rows } = await conexion.query(strSql, [cursoId]);
+        const { rows } = await client.query(strSql, [cursoId]);
         const curso = rows[0];
         if (!curso) {
             console.error("no hay curso");
             return null;
         }
-        const { rows: rowsUpdate } = await this.update(
+        const rowsUpdate = await this.update(
             curso.id_curso,
             curso.nombre,
             curso.descripcion,
@@ -147,6 +148,7 @@ export default class CursoRepository {
             4,
             1
         );
+        client.release();
         return rowsUpdate;
     }
 

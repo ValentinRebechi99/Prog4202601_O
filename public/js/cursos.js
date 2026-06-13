@@ -69,16 +69,16 @@ const mostrarCursos = (datos) => {
         const fila = document.createElement("tr");
 
         fila.innerHTML = `
-            <td>${curso.id_curso}</td>
+            <td>${curso.idCurso}</td>
             <td>${curso.nombre}</td>
             <td>${curso.descripcion}</td>
-            <td>${new Date(curso.fecha_inicio).toLocaleDateString()}</td>
-            <td>${curso.cantidad_horas}</td>
-            <td>${curso.inscriptos_max}</td>
+            <td>${new Date(curso.fechaInicio).toLocaleDateString()}</td>
+            <td>${curso.cantidadHoras}</td>
+            <td>${curso.inscriptosMax}</td>
             <td>${curso.estado}</td>
             <td>
                 <div class="boton-mod">
-                    <a href="cursos-mod.html#${curso.id_curso}" class="btn btn-secondary">
+                    <a href="cursos-mod.html#${curso.idCurso}" class="btn btn-secondary">
                         +Modificar Curso
                     </a>
 
@@ -103,7 +103,7 @@ const mostrarCursos = (datos) => {
                 try {
 
                     const respuesta = await fetch(
-                        `http://localhost:3000/cursos/${curso.id_curso}`,
+                        `http://localhost:3000/cursos/${curso.idCurso}`,
                         {
                             method: "DELETE"
                         }

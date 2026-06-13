@@ -49,10 +49,10 @@ class CursosController {
             const data = await this.database.create(
                 body.nombre,
                 body.descripcion,
-                body.fecha_inicio,
-                body.cantidad_horas,
-                body.inscriptos_maximos,
-                body.id_curso_estado,
+                body.fechaInicio,
+                body.cantidadHoras,
+                body.inscriptosMaximos,
+                body.idCursoEstado,
                 1
             ); return res.status(201).send(data);
 
@@ -65,8 +65,8 @@ class CursosController {
     update = async (req, res) => {
         try {
             const { body } = req;
-            const Curso_id = req.params.cursoId;
-            if (!Curso_id || !body.nombre || !body.descripcion || !body.fecha_inicio || !body.cantidad_horas || !body.inscriptos_maximos || !body.id_curso_estado){
+            const cursoId = req.params.cursoId;
+            if (!cursoId || !body.nombre || !body.descripcion || !body.fechaInicio || !body.cantidadHoras || !body.inscriptosMaximos || !body.idCursoEstado){
                 res
                     .status(404)
                     .send({
@@ -76,7 +76,7 @@ class CursosController {
                         }
                     });
             }
-            const data = await this.servicio.update(Curso_id, body.nombre, body.descripcion, body.fecha_inicio, body.cantidad_horas, body.inscriptos_maximos, body.id_curso_estado, 1);
+            const data = await this.servicio.update(cursoId, body.nombre, body.descripcion, body.fechaInicio, body.cantidadHoras, body.inscriptosMaximos, body.idCursoEstado, 1);
             res.send(data);
         }
         catch (error) {
@@ -85,13 +85,13 @@ class CursosController {
         }
     }
 
-    destroy = async (req, res) => {
+    delete = async (req, res) => {
         try{
-            const Curso_id = req.params.cursoId;
-            if(!Curso_id) {
-                res.status(400).send({ status: "Fallo", data: { error: "El parámetro CursoID no puede ser vacío." } });
+            const cursoId = req.params.cursoId;
+            if(!cursoId) {
+                res.status(400).send({ status: "Fallo", data: { error: "El parámetro cursoID no puede ser vacío." } });
             }
-            const data = await this.servicio.destroy(parseInt(Curso_id));
+            const data = await this.servicio.delete(parseInt(cursoId));
             res.send(data);
         } catch (error) {
             console.error("Error en el controlador (update):", error);
