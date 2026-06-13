@@ -35,74 +35,53 @@
 
 
         <main>
-            <div id="error" class="alert alert-danger" style="display: none" role="alert"></div>
             <div class="contenedor-cursos">
                 <div class="header-seccion">
                     <h2>Cursos</h2>
-                    
+
                     <div class="boton-nuevo">
                         <a href="cursos-nuevo.html" class="btn btn-secondary">+Nuevo Curso</a>
                     </div>
 
 
                 </div>
-                <div class="filtros-cursos">
+                <input type="text" id="buscarCurso" placeholder="Buscar por ID">
 
-    <div class="input-busqueda">
-
-        <input type="text" id="buscarCurso" placeholder="Buscar por curso">
-
-                </div>
-                
                 <select id="estado" class="form-control">
-                
-                
-                
+                    <option value="">TODOS</option>
                     <option value="BORRADOR">BORRADOR</option>
-                
-                    <option value="INSCRIPCIÓN ABIERTA">
-                        INSCRIPCIÓN ABIERTA
-                    </option>
-                
-                    <option value="INSCRIPCIÓN CERRADA">
-                        INSCRIPCIÓN CERRADA
-                    </option>
-                
-                    <option value="ELIMINADO">
-                        ELIMINADO
-                    </option>
-                
+                    <option value="INSCRIPCIÓN ABIERTA">INSCRIPCIÓN ABIERTA</option>
+                    <option value="INSCRIPCIÓN CERRADA">INSCRIPCIÓN CERRADA</option>
                 </select>
-                </div>
 
-                </div>
-                <div class="tabla-card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Curso</th>
-                                <th>Descripcion</th>
-                                <th>Fecha Inicio</th>
-                                <th>Cantidad de horas</th>
-                                <th>Maximo Inscriptos</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
+            </div>
+            <div class="tabla-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Curso</th>
+                            <th>Descripcion</th>
+                            <th>Fecha Inicio</th>
+                            <th>Cantidad de horas</th>
+                            <th>Maximo Inscriptos</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
 
-                        <tbody id="tbody">
-                        </tbody>
-                    </table>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
 
-                    <div class="footer-tabla">
-                        <span class="badge-registros">x Registros</span>
-                        <div class="paginacion">
-                            <button disabled>← Ant</button>
-                            <span>1/1</span>
-                            <button disabled>Sig →</button>
-                        </div>
+                <div class="footer-tabla">
+                    <span class="badge-registros">x Registros</span>
+                    <div class="paginacion">
+                        <button disabled>← Ant</button>
+                        <span>1/1</span>
+                        <button disabled>Sig →</button>
                     </div>
                 </div>
+            </div>
 
         </main>
     </div>
