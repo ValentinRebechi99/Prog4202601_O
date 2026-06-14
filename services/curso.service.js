@@ -23,7 +23,6 @@ export default class CursoService extends BaseService {
     async findall(filter, limit, offset, order){
         const sqlFilter = this.mapKeysToColumns(filter, CursoService.KEYS_MAP);
         const sqlOrder = this.mapKeysToColumns(order, CursoService.KEYS_MAP);
-
         const respuestaBD = await this.repository.findall(sqlFilter, limit, offset, sqlOrder);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
