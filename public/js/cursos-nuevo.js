@@ -7,10 +7,10 @@ const iniciar = () => {
         const obj = {
             nombre: document.getElementById("nombre").value,
             descripcion: document.getElementById("descripcion").value,
-            fecha_inicio: document.getElementById("fechaInicio").value,
-            cantidad_horas: document.getElementById("cantidadHoras").value,
-            inscriptos_maximos: document.getElementById("cantidadInscriptos").value,
-            id_curso_estado: parseInt(
+            fechaInicio: document.getElementById("fechaInicio").value,
+            cantidadHoras: document.getElementById("cantidadHoras").value,
+            inscriptosMaximos: document.getElementById("cantidadInscriptos").value,
+            idCursoEstado: parseInt(
                 document.getElementById("estado").value
             )
         };

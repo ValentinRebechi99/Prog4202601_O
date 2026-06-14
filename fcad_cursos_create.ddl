@@ -648,3 +648,24 @@ ALTER TABLE ONLY public.inscripciones
 ALTER TABLE ONLY public.inscripciones
     ADD CONSTRAINT fk_inscripciones_usuarios FOREIGN KEY (id_usuario_modificacion) REFERENCES public.usuarios(id_usuario);
 
+
+DO $$
+BEGIN
+    -- Reiniciar secuencia de cursos
+    PERFORM setval(pg_get_serial_sequence('public.cursos', 'id_curso'), COALESCE((SELECT max(id_curso) FROM public.cursos), 1));
+
+    -- Reiniciar secuencia de cursos_estados
+    PERFORM setval(pg_get_serial_sequence('public.cursos_estados', 'id_curso_estado'), COALESCE((SELECT max(id_curso_estado) FROM public.cursos_estados), 1));
+
+    -- Reiniciar secuencia de estudiantes
+    PERFORM setval(pg_get_serial_sequence('public.estudiantes', 'id_estudiante'), COALESCE((SELECT max(id_estudiante) FROM public.estudiantes), 1));
+
+    -- Reiniciar secuencia de inscripciones
+    PERFORM setval(pg_get_serial_sequence('public.inscripciones', 'id_inscripcion'), COALESCE((SELECT max(id_inscripcion) FROM public.inscripciones), 1));
+
+    -- Reiniciar secuencia de inscripciones_estados
+    PERFORM setval(pg_get_serial_sequence('public.inscripciones_estados', 'id_inscripcion_estado'), COALESCE((SELECT max(id_inscripcion_estado) FROM public.inscripciones_estados), 1));
+
+    -- Reiniciar secuencia de usuarios
+    PERFORM setval(pg_get_serial_sequence('public.usuarios', 'id_usuario'), COALESCE((SELECT max(id_usuario) FROM public.usuarios), 1));
+END $$;

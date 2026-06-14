@@ -68,7 +68,7 @@ export default class CursoRepository {
         return rows;
     }
 
-    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_usuario_modificacion) => {
+    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos,id_curso_estado=1, id_usuario_modificacion) => {
         const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0]; 
         const strSql = `

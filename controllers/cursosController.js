@@ -39,14 +39,14 @@ class CursosController {
             if (!body) {
                 return res.status(400).send({ status: "Fallo", data: { error: "No se enviaron datos en el cuerpo de la petición." } });
             }
-            if (!body.nombre || !body.descripcion || !body.fecha_inicio || !body.cantidad_horas || !body.inscriptos_maximos) {
+            if (!body.nombre || !body.descripcion || !body.fechaInicio || !body.cantidadHoras || !body.inscriptosMaximos) {
                 return res.status(400).send({
                     status: "Fallo",
                     data: { error: "Faltan datos para poder crear el curso" }
                 });
             }
 
-            const data = await this.database.create(
+            const data = await this.servicio.create(
                 body.nombre,
                 body.descripcion,
                 body.fechaInicio,
