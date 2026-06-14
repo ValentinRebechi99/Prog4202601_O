@@ -35,16 +35,6 @@ class CursosController {
     create = async (req, res) => {
         try {
             const { body } = req;
-            if (!body) {
-                return res.status(400).send({ status: "Fallo", data: { error: "No se enviaron datos en el cuerpo de la petición." } });
-            }
-            if (!body.nombre || !body.descripcion || !body.fechaInicio || !body.cantidadHoras || !body.inscriptosMaximos) {
-                return res.status(400).send({
-                    status: "Fallo",
-                    data: { error: "Faltan datos para poder crear el curso" }
-                });
-            }
-
             const data = await this.servicio.create(
                 body.nombre,
                 body.descripcion,
@@ -65,16 +55,6 @@ class CursosController {
         try {
             const { body } = req;
             const cursoId = req.params.cursoId;
-            if (!cursoId || !body.nombre || !body.descripcion || !body.fechaInicio || !body.cantidadHoras || !body.inscriptosMaximos || !body.idCursoEstado){
-                res
-                    .status(404)
-                    .send({
-                        status: "Fallo",
-                        data: {
-                            error: "Faltan datos para poder crear el curso"
-                        }
-                    });
-            }
             const data = await this.servicio.update(cursoId, body.nombre, body.descripcion, body.fechaInicio, body.cantidadHoras, body.inscriptosMaximos, body.idCursoEstado, 1);
             res.send(data);
         }
