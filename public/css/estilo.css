@@ -1,6 +1,6 @@
-html, body {
-  margin: 0;
-  padding: 0;
+body {
+    margin: 0;
+    padding: 0;
 }
 
 header {
@@ -16,7 +16,7 @@ header div.contenedor {
     width: 100vw;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center ;
+    align-items: center;
 }
 
 header h1 {
@@ -35,7 +35,7 @@ div.contenedor-principal {
     margin: auto;
     flex-direction: row;
     justify-content: flex-start;
-    
+
 }
 
 
@@ -78,20 +78,49 @@ main.nuevo-boton {
 }
 
 footer {
-    
+
     background-color: #06304e;
     color: white
-    
 }
-#formCurso{
-  
+
+#formCurso {
+
     flex-direction: row;
     justify-content: space-around;
     padding-left: 2rem;
 }
 
-#elementos{
-    
-    padding-left:  1rem;
+#elementos {
+
+    padding-left: 1rem;
     align-items: center;
 }
+
+
+/* login */
+.loginform {
+    
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 16px;
+    border: 1px solid;
+    border-radius: 15px;
+
+}
+
