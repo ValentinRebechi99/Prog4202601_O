@@ -1,21 +1,19 @@
-import CursoService from "../services/curso.service.js";
+import EstudianteService from "../services/estudiante.service.js";
 
-class CursosController {
+class EstudiantesController {
     constructor() {
-        this.servicio = new CursoService();
+        this.servicio = new EstudianteService();
     }
 
     findAll = async (req, res) => {
-        console.log(req.query);
-        console.log(req.filter);
         try {
-            const { filter, limit, offset, order } = req;
+            const { filter, limit, offset, order} = req;
             const data = await this.servicio.findall(filter, limit, offset, order);
             res.send(data);
         }
-        catch (exc) {
+        catch(exc){
             console.error(exc)
-            res.status(500).json({ error: 'Error al obtener los cursos' });
+            res.status(500).json({ error: 'Error al obtener los estudiantes' });
         }
     }
 
@@ -23,12 +21,12 @@ class CursosController {
         try {
             const { body } = req;
             const data = await this.servicio.create(
-                body.nombre,
-                body.descripcion,
-                body.fechaInicio,
-                body.cantidadHoras,
-                body.inscriptosMaximos,
-                body.idCursoEstado,
+                body.documento,
+                body.apellido, 
+                body.nombres, 
+                body.email, 
+                body.fecha_nacimiento, 
+                body.activo,
                 1
             ); return res.status(201).send(data);
 
@@ -41,8 +39,15 @@ class CursosController {
     update = async (req, res) => {
         try {
             const { body } = req;
-            const cursoId = req.params.cursoId;
-            const data = await this.servicio.update(cursoId, body.nombre, body.descripcion, body.fechaInicio, body.cantidadHoras, body.inscriptosMaximos, body.idCursoEstado, 1);
+            const idEstudiante = req.params.idEstudiante;
+            const data = await this.servicio.update(idEstudiante,
+                body.documento,
+                body.apellido,
+                body.nombres,
+                body.email,
+                body.fechaNacimiento,
+                body.activo,
+                1);
             res.send(data);
         }
         catch (error) {
@@ -52,12 +57,12 @@ class CursosController {
     }
 
     delete = async (req, res) => {
-        try {
-            const cursoId = req.params.cursoId;
-            if (!cursoId) {
-                res.status(400).send({ status: "Fallo", data: { error: "El parámetro cursoID no puede ser vacío." } });
+        try{
+            const estudianteId = req.params.estudianteId;
+            if(!estudianteId) {
+                res.status(400).send({ status: "Fallo", data: { error: "El parámetro estudianteId no puede ser vacío." } });
             }
-            const data = await this.servicio.delete(parseInt(cursoId),1);
+            const data = await this.servicio.delete(parseInt(estudianteId,1));
             res.send(data);
         } catch (error) {
             console.error("Error en el controlador (update):", error);
@@ -66,4 +71,4 @@ class CursosController {
     }
 }
 
-export default CursosController;
+export default EstudiantesController;

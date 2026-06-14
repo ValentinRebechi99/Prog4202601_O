@@ -1,5 +1,9 @@
 import { query, validationResult } from 'express-validator';
 const estudiantesFindAllValidation = [
+    query('estudianteId')
+    .optional().notEmpty().withMessage("el estudianteId no puede esta vacio")
+    .isInt({ min: 1,max:2147483647 }).withMessage('la Id debe ser un numero')
+    .toInt(),
     query('documento')
         .optional()
         .isString().withMessage('documento debe ser una cadena de texto'),

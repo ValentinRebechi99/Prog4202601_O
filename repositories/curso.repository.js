@@ -127,7 +127,7 @@ export default class CursoRepository {
         return rows;
     }
 
-    destroy = async (cursoId) => {
+    destroy = async (cursoId, idUsuarioModificacion) => {
         const client = await conexion.createConnection()
         const strSql = 'SELECT c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion, ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado WHERE c.id_curso = $1;';
         const { rows } = await client.query(strSql, [cursoId]);
@@ -144,7 +144,7 @@ export default class CursoRepository {
             curso.cantidad_horas,
             curso.inscriptos_max,
             4,
-            1
+            idUsuarioModificacion
         );
         client.release();
         return rowsUpdate;

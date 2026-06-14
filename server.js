@@ -3,7 +3,7 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { router as v1RouterCursos } from './routes/v1/cursosRoutes.js';
+import { router as v1Router } from './routes/v1/Routes.js';
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.static(__dirname)); 
 
 app.use(cors());
-app.use("/", v1RouterCursos);
+app.use("/", v1Router);
 
 const rutaArchivo = path.join(__dirname, 'estudiantes.json');
 

@@ -44,8 +44,8 @@ export default class CursoService extends BaseService {
         return respuesta;
     }
 
-    async delete(cursoID) {
-        const respuestaBD = await this.repository.destroy(cursoID);
+    async delete(cursoID, idUsuarioModificacion=2){
+        const respuestaBD = await this.repository.destroy(cursoID, idUsuarioModificacion);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
     }
