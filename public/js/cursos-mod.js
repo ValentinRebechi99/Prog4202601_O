@@ -5,7 +5,7 @@ const cargarCurso = async () => {
     try {
 
         const respuesta = await fetch(
-            `http://localhost:3000/cursos/${cursoId}`
+            `http://localhost:3000/cursos/?idCurso=${cursoId}`
         );
 
         if (!respuesta.ok) {
@@ -30,13 +30,33 @@ const cargarCurso = async () => {
         document.getElementById("cantidadInscriptos").value =
             curso.inscriptosMax;
 
-        document.getElementById("estado").value =
-            curso.estado;
-
+        switch(curso.estado){
+            case "BORRADOR":
+                document.getElementById("estado").value = "1";
+                break;
+            case "INSCRIPCIÓN ABIERTA":
+                document.getElementById("estado").value = "2";
+                break;
+            case "INSCRIPCIÓN CERRADA":
+                document.getElementById("estado").value = "3";
+                break;
+            case "ELIMINADO":
+                document.getElementById("estado").value = "4";
+                break;
+        }
+        
+        document.getElementById("nombre").classList.remove('is-invalid');
+        document.getElementById("descripcion").classList.remove('is-invalid');
+        document.getElementById("fechaInicio").classList.remove('is-invalid');
+        document.getElementById("cantidadHoras").classList.remove('is-invalid');
+        document.getElementById("cantidadInscriptos").classList.remove('is-invalid');
+        document.getElementById("estado").classList.remove('is-invalid');
+        document.getElementById("ErrorServer").classList.add('d-none');
+        
     } catch (error) {
-
         console.error(error);
-        alert("Error al cargar curso");
+        document.getElementById("ErrorServer").textContent = "Error al cargar los datos del curso";
+        document.getElementById("ErrorServer").classList.remove('d-none');
     }
 };
 
@@ -88,7 +108,33 @@ const iniciar = () => {
             );
 
             if (!respuesta.ok) {
-                throw new Error();
+                const errorBody = await respuesta.json();
+                if (respuesta.status == 400){
+                    for (const errorRes of errorBody.errors){
+                        switch(errorRes.path){
+                            case "nombre":
+                                document.getElementById("nombre").classList.add('is-invalid');
+                                break;
+                            case "descripcion":
+                                document.getElementById("descripcion").classList.add('is-invalid');
+                                break;
+                            case "fechaInicio":
+                                document.getElementById("fechaInicio").classList.add('is-invalid');
+                                break;
+                            case "cantidadHoras":
+                                document.getElementById("cantidadHoras").classList.add('is-invalid');
+                                break;
+                            case "inscriptosMaximos":
+                                document.getElementById("cantidadInscriptos").classList.add('is-invalid');
+                                break;
+                            case "idCursoEstado":
+                                document.getElementById("estado").classList.add('is-invalid');
+                        }
+                    }
+                } else {
+                    document.getElementById("ErrorServer").classList.remove('d-none');
+                }
+                throw new Error(`Response ${respuesta.status}`);
             }
 
             alert("Curso actualizado correctamente");
@@ -96,9 +142,11 @@ const iniciar = () => {
             window.location.href = "cursos.html";
 
         } catch (error) {
-
+            if(error instanceof TypeError){
+                document.getElementById("ErrorServer").textContent = "Error al cargar los datos del curso";
+                document.getElementById("ErrorServer").classList.remove('d-none'); 
+            }
             console.error(error);
-            alert("Error al actualizar curso");
         }
     });
 };

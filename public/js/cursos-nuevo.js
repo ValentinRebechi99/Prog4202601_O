@@ -14,6 +14,14 @@ const iniciar = () => {
                 document.getElementById("estado").value
             )
         };
+
+        document.getElementById("nombre").classList.remove('is-invalid');
+        document.getElementById("descripcion").classList.remove('is-invalid');
+        document.getElementById("fechaInicio").classList.remove('is-invalid');
+        document.getElementById("cantidadHoras").classList.remove('is-invalid');
+        document.getElementById("cantidadInscriptos").classList.remove('is-invalid');
+        document.getElementById("ErrorServer").classList.add('d-none');
+
         try {
 
             const respuesta = await fetch("http://localhost:3000/cursos",
@@ -31,7 +39,31 @@ const iniciar = () => {
             );
 
             if (!respuesta.ok) {
-                throw new Error("Error al guardar");
+                const errorBody = await respuesta.json();
+                if (respuesta.status == 400){
+                    for (const errorRes of errorBody.errors){
+                        switch(errorRes.path){
+                            case "nombre":
+                                document.getElementById("nombre").classList.add('is-invalid');
+                                break;
+                            case "descripcion":
+                                document.getElementById("descripcion").classList.add('is-invalid');
+                                break;
+                            case "fechaInicio":
+                                document.getElementById("fechaInicio").classList.add('is-invalid');
+                                break;
+                            case "cantidadHoras":
+                                document.getElementById("cantidadHoras").classList.add('is-invalid');
+                                break;
+                            case "inscriptosMaximos":
+                                document.getElementById("cantidadInscriptos").classList.add('is-invalid');
+                                break;
+                        }
+                    }
+                } else {
+                    document.getElementById("ErrorServer").classList.remove('d-none');
+                }
+                throw new Error(`Response ${respuesta.status}`);
             }
 
             const datos = await respuesta.json();
@@ -43,12 +75,11 @@ const iniciar = () => {
             window.location.href = "http://localhost:3000/cursos.html";
 
         } catch (error) {
-
+            if(error instanceof TypeError){
+                document.getElementById("ErrorServer").classList.remove('d-none'); 
+            }
             console.error(error);
-
-            alert("Error al guardar curso");
         }
-        console.log(obj);
 
     });
 };

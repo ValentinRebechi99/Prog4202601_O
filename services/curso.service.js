@@ -28,12 +28,6 @@ export default class CursoService extends BaseService {
         return respuesta;
     }
 
-    async findbyid(cursoID){
-        const respuestaBD = await this.repository.findById(cursoID);
-        const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
-        return respuesta;
-    }
-
     async create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos,id_curso_estado ,idUsuarioModificacion=2){
         const respuestaBD = await this.repository.create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos,id_curso_estado, idUsuarioModificacion);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
