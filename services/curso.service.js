@@ -10,6 +10,7 @@ export default class CursoService extends BaseService {
         fechaInicio: 'fecha_inicio',
         cantidadHoras: 'cantidad_horas',
         inscriptosMax: 'inscriptos_max',
+        idCursoEstado: 'id_curso_estado',
         estado: 'estado',
         idUsuarioModificacion: 'id_usuario_modificacion',
         fechaHoraModificacion: 'fecha_hora_modificacion'
@@ -20,27 +21,30 @@ export default class CursoService extends BaseService {
         this.repository = new CursoRepository();
     }
 
-    async findall(filter, limit, offset, order){
+    async findall(filter, limit, offset, order) {
+        console.log("filter original:", filter);
         const sqlFilter = this.mapKeysToColumns(filter, CursoService.KEYS_MAP);
+        console.log("sqlFilter:", sqlFilter);
         const sqlOrder = this.mapKeysToColumns(order, CursoService.KEYS_MAP);
         const respuestaBD = await this.repository.findall(sqlFilter, limit, offset, sqlOrder);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
+        console.log(filter);
         return respuesta;
     }
 
-    async create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos,id_curso_estado ,idUsuarioModificacion=2){
-        const respuestaBD = await this.repository.create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos,id_curso_estado, idUsuarioModificacion);
+    async create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos, id_curso_estado, idUsuarioModificacion = 2) {
+        const respuestaBD = await this.repository.create(nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMaximos, id_curso_estado, idUsuarioModificacion);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
     }
 
-    async update(cursoId, nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMax, idCursoEstado, idUsuarioModificacion=2){
+    async update(cursoId, nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMax, idCursoEstado, idUsuarioModificacion = 2) {
         const respuestaBD = await this.repository.update(cursoId, nombre, descripcion, fechaInicio, cantidadHoras, inscriptosMax, idCursoEstado, idUsuarioModificacion);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
     }
 
-    async delete(cursoID){
+    async delete(cursoID) {
         const respuestaBD = await this.repository.destroy(cursoID);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;

@@ -5,24 +5,28 @@ export default class CursoRepository {
     constructor() {
         this.estados = new CursosEstados();
     }
-    findall = async (filter,limit,offset,order) => {
+    findall = async (filter, limit, offset, order) => {
         const client = await conexion.createConnection();
 
         let strWhere = '';
         let strOrder = '';
         let strLimit = '';
         let strOffset = '';
-        
+        console.log("filter recibido:", filter);
+
         if (filter && Object.keys(filter).length > 0) {
+
             Object.entries(filter).forEach(([key, value]) => {
+                console.log("KEY:", key);
+                console.log("VALUE:", value);
                 if (typeof value === 'string') {
-                    strWhere += `AND ${key} LIKE '%${value}%'`
+                    strWhere += `AND c.${key} ILIKE '%${value}%' `
                 } else {
-                    strWhere += `AND ${key} = ${value}`
+                    strWhere += `AND c.${key} = ${value} `
                 }
             });
         }
-
+        console.log("strWhere:", strWhere);
         if (order && Object.keys(order).length > 0) {
             Object.entries(order).forEach(([key, value]) => {
                 strOrder += `${key} ${value}, `
@@ -37,7 +41,7 @@ export default class CursoRepository {
         if (offset) {
             strOffset = `OFFSET ${offset} `
         }
-        
+
         let strSql = `
             SELECT c.id_curso,
                 c.nombre,
@@ -55,14 +59,16 @@ export default class CursoRepository {
             ${strLimit}
             ${strOffset};        
         `;
-        const {rows} = await client.query(strSql);
+        console.log(filter);
+        console.log(strSql);
+        const { rows } = await client.query(strSql);
         client.release();
         return rows;
     }
 
-    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos,id_curso_estado=1, id_usuario_modificacion) => {
+    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos, id_curso_estado = 1, id_usuario_modificacion) => {
         const client = await conexion.createConnection()
-        const fecha_modificacion = new Date().toISOString().split('T')[0]; 
+        const fecha_modificacion = new Date().toISOString().split('T')[0];
         const strSql = `
             INSERT INTO public.cursos 
             (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion, fecha_hora_modificacion) 
@@ -80,14 +86,14 @@ export default class CursoRepository {
                 id_usuario_modificacion,
                 fecha_modificacion
             ];
-        
+
             const { rows } = await client.query(strSql, parametros);
             const nuevoId = rows[0].id_curso;
             const response = await this.findById(nuevoId);
             client.release();
             return response;
         }
-        catch(error) {
+        catch (error) {
             client.release();
             console.error("Error en el controlador (create):", error);
         }

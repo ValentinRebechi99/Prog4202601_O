@@ -6,12 +6,14 @@ class CursosController {
     }
 
     findAll = async (req, res) => {
+        console.log(req.query);
+        console.log(req.filter);
         try {
-            const { filter, limit, offset, order} = req;
+            const { filter, limit, offset, order } = req;
             const data = await this.servicio.findall(filter, limit, offset, order);
             res.send(data);
         }
-        catch(exc){
+        catch (exc) {
             console.error(exc)
             res.status(500).json({ error: 'Error al obtener los estudiantes' });
         }
@@ -50,9 +52,9 @@ class CursosController {
     }
 
     delete = async (req, res) => {
-        try{
+        try {
             const cursoId = req.params.cursoId;
-            if(!cursoId) {
+            if (!cursoId) {
                 res.status(400).send({ status: "Fallo", data: { error: "El parámetro cursoID no puede ser vacío." } });
             }
             const data = await this.servicio.delete(parseInt(cursoId));
