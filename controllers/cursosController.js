@@ -17,21 +17,6 @@ class CursosController {
         }
     }
 
-    findById = async (req, res) => {
-        try {
-            const Curso_id = req.params.cursoId;
-            if(!Curso_id) {
-                res.status(400).send({ status: "Fallo", data: { error: "El parámetro CursoID no puede ser vacío." } });
-            }
-            const data = await this.servicio.findbyid(parseInt(Curso_id));
-            res.send(data);
-        }
-        catch(exc){
-            console.error(exc)
-            res.status(500).json({ error: 'Error al obtener los estudiantes' });
-        }
-    }
-
     create = async (req, res) => {
         try {
             const { body } = req;

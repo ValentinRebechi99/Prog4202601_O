@@ -10,7 +10,6 @@ const router = express.Router();
 const cursosController = new CursosController();
 
 router.get("/cursos", [cursosFindAllValidation, cursosFindAllTransform], cursosController.findAll.bind(cursosController));
-router.get("/cursos/:cursoId", cursosController.findById.bind(cursosController));
 router.post("/cursos", cursosCreateValidation, cursosController.create.bind(cursosController));
 router.put("/cursos/:cursoId", cursosUpdateValidation, cursosController.update.bind(cursosController));
 router.delete("/cursos/:cursoId", cursosDeleteValidation ,cursosController.delete.bind(cursosController));
