@@ -7,11 +7,11 @@ class EstudiantesController {
 
     findAll = async (req, res) => {
         try {
-            const { filter, limit, offset, order} = req;
+            const { filter, limit, offset, order } = req;
             const data = await this.servicio.findall(filter, limit, offset, order);
             res.send(data);
         }
-        catch(exc){
+        catch (exc) {
             console.error(exc)
             res.status(500).json({ error: 'Error al obtener los estudiantes' });
         }
@@ -22,10 +22,10 @@ class EstudiantesController {
             const { body } = req;
             const data = await this.servicio.create(
                 body.documento,
-                body.apellido, 
-                body.nombres, 
-                body.email, 
-                body.fecha_nacimiento, 
+                body.apellido,
+                body.nombres,
+                body.email,
+                body.fechaNacimiento,
                 body.activo,
                 1
             ); return res.status(201).send(data);
@@ -38,9 +38,10 @@ class EstudiantesController {
 
     update = async (req, res) => {
         try {
+
             const { body } = req;
-            const idEstudiante = req.params.idEstudiante;
-            const data = await this.servicio.update(idEstudiante,
+            const estudianteId = req.params.estudianteId;
+            const data = await this.servicio.update(estudianteId,
                 body.documento,
                 body.apellido,
                 body.nombres,
@@ -57,12 +58,12 @@ class EstudiantesController {
     }
 
     delete = async (req, res) => {
-        try{
+        try {
             const estudianteId = req.params.estudianteId;
-            if(!estudianteId) {
+            if (!estudianteId) {
                 res.status(400).send({ status: "Fallo", data: { error: "El parámetro estudianteId no puede ser vacío." } });
             }
-            const data = await this.servicio.delete(parseInt(estudianteId),1);
+            const data = await this.servicio.delete(parseInt(estudianteId), 1);
             res.send(data);
         } catch (error) {
             console.error("Error en el controlador (update):", error);

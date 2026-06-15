@@ -1,14 +1,14 @@
 import conexion from "./conexion.js"
 
 export default class EstudianteRepository {
-    findall = async (filter,limit,offset,order) => {
+    findall = async (filter, limit, offset, order) => {
         const client = await conexion.createConnection();
 
         let strWhere = '';
         let strOrder = '';
         let strLimit = '';
         let strOffset = '';
-        
+
         if (filter && Object.keys(filter).length > 0) {
             Object.entries(filter).forEach(([key, value]) => {
                 if (typeof value === 'string') {
@@ -33,7 +33,7 @@ export default class EstudianteRepository {
         if (offset) {
             strOffset = `OFFSET ${offset} `
         }
-        
+
         let strSql = `
             SELECT id_estudiante,
                 documento,
@@ -48,20 +48,22 @@ export default class EstudianteRepository {
             ${strLimit}
             ${strOffset};        
         `;
-        const {rows} = await client.query(strSql);
+        const { rows } = await client.query(strSql);
         client.release();
         return rows;
     }
 
     create = async (documento, apellido, nombres, email, fecha_nacimiento, activo, id_usuario_modificacion) => {
         const client = await conexion.createConnection()
-        const fecha_modificacion = new Date().toISOString().split('T')[0]; 
+        const fecha_modificacion = new Date().toISOString().split('T')[0];
         const strSql = `
             INSERT INTO public.estudiantes
             (documento, apellido, nombres, email, fecha_nacimiento, activo, id_usuario_modificacion, fecha_hora_modificacion)
-            VALUES($1, $2, $3, $4, $5, $6, $7, $8);
-            INSERT INTO public.cursos 
+            VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING *;
         `;
+
+        /* INSERT INTO public.cursos  */
         try {
             const parametros = [
                 documento,
@@ -73,22 +75,24 @@ export default class EstudianteRepository {
                 id_usuario_modificacion,
                 fecha_modificacion
             ];
-        
+
             const { rows } = await client.query(strSql, parametros);
-            const nuevoId = rows[0].id_curso;
-            const response = await this.findById(nuevoId);
+
             client.release();
-            return response;
-        }
-        catch(error) {
+
+            return rows[0];
+
+        } catch (error) {
+
             client.release();
-            console.error("Error en el controlador (create):", error);
+            console.error(error);
+            throw error;
         }
     }
 
 
 
-    update = async (idEstudiante,documento, apellido, nombres, email, fechaNacimiento, activo, idUsuarioModificacion) => {
+    update = async (idEstudiante, documento, apellido, nombres, email, fechaNacimiento, activo, idUsuarioModificacion) => {
         const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         const strSql = `
@@ -110,6 +114,7 @@ export default class EstudianteRepository {
         ];
 
         const { rows } = await client.query(strSql, parametros);
+
         client.release();
         return rows;
     }
@@ -137,8 +142,8 @@ export default class EstudianteRepository {
             estudiante.apellido,
             estudiante.nombres,
             estudiante.email,
-            estudiante.fecha_nacimiento, 
-            0, 
+            estudiante.fecha_nacimiento,
+            0,
             idUsuarioModificacion
         );
         client.release();

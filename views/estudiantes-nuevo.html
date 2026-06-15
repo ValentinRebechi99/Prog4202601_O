@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
     <script src="./js/estudiantes-nuevo.js" type="module" defer></script>
-    <script src="./js/estudiantes.js" type="module" defer></script>
+
 
 </head>
 
@@ -35,14 +35,14 @@
         </nav>
 
         <main>
-            <h2 id="formEstudiante">Crear nuevo estudiante</h2>
+            <h2>Crear nuevo estudiante</h2>
             <div class="alert alert-danger d-none" id="ErrorServer" role="alert">
                 Error interno del servidor
             </div>
             <form id="formEstudiante">
                 <div class="form-group">
                     <label for="Documento">Documento:</label>
-                    <input type="text" id="Documento" class="form-control" required>
+                    <input type="text" id="documento" class="form-control" required>
                     <div class="invalid-feedback">
                         el documento es necesario
                     </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Fecha de Nacimiento">Fecha Nacimiento:</label>
-                    <input type="date" id="Fecha de Nacimiento" class="form-control" required>
+                    <input type="date" id="fecnac" class="form-control" required>
                     <div class="invalid-feedback">
                         la fecha de nacimiento es necesaria
                     </div>
@@ -81,8 +81,8 @@
                 <div class="form-group  ">
                     <label for="activo">Activo:</label>
                     <select id="activo" class="form-control">
-                        <option value="true">Sí</option>
-                        <option value="false">No</option>
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
                     </select>
                 </div>
                 <button type="submit" id="btnGuardarEstudiante" class="btn btn-primary">Crear Estudiante</button>

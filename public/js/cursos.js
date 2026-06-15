@@ -79,7 +79,7 @@ const mostrarCursos = (datos) => {
     tabla.innerHTML = "";
 
     datos.forEach(curso => {
-        console.log(datos);
+
         const fila = document.createElement("tr");
 
         fila.innerHTML = `
@@ -133,7 +133,7 @@ const mostrarCursos = (datos) => {
 
                 } catch (error) {
 
-                    console.error(error);
+
 
                     alert("Error al eliminar");
                 }
