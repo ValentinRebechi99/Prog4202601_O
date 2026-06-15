@@ -53,6 +53,7 @@ salir.addEventListener("click", async (evt) => {
     evt.preventDefault();
     evt.stopPropagation();
     localStorage.removeItem('auth_token');
+    document.cookie = "auth_token=; path=/; max-age=0; SameSite=Strict";
     window.location.href = "/";
     return null;
 });

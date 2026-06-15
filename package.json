@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ValentinRebechi99/Prog4202601_O#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

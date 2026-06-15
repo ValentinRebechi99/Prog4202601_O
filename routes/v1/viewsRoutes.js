@@ -1,4 +1,5 @@
 import express from "express";
+import passport from 'passport';
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -30,7 +31,7 @@ router.get("/estudiantes-mod.html", (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'estudiantes-mod.html'));
 });
 
-router.get("/estudiantes.html", (req, res) => {
+router.get("/estudiantes.html",passport.authenticate('jwt', { session: false }) , (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'estudiantes.html'));
 });
 

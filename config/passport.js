@@ -2,6 +2,15 @@ import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 import { Strategy as LocalStrategy } from 'passport-local';
 import UsuariosService from '../services/usuarios.service.js';
 
+// funcion extra para obtener el token de la cookie si no hay auth-header
+const cookieExtractor = (req) => {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies['auth_token'];
+    }
+    return token;
+};
+
 const localStrategy = new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password'
@@ -22,7 +31,7 @@ const localStrategy = new LocalStrategy({
 );
 
 const jwtStrategy = new JwtStrategy({
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken(),cookieExtractor]),
     secretOrKey: process.env.JWT_SECRET
 },
     async (jwtPayload, done) => {
