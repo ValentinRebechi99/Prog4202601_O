@@ -1,11 +1,7 @@
 import conexion from "./conexion.js"
-import CursosEstados from "./cursos_estados.js"
 
 export default class CursoRepository {
-    constructor() {
-        this.estados = new CursosEstados();
-    }
-    findall = async (filter, limit, offset, order) => {
+    findall = async (filter,limit,offset,order) => {
         const client = await conexion.createConnection();
 
         let strWhere = '';

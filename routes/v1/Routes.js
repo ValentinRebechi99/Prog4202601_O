@@ -13,10 +13,18 @@ import estudiantesFindAllTransform from "../../transforms/estudiantes/estudiante
 import estudiantesCreateValidation from "../../validators/estudiantes/estudiantesCreate.validation.js";
 import estudiantesUpdateValidation from "../../validators/estudiantes/estudiantesUpdate.validation.js";
 import estudiantesDeleteValidation from "../../validators/estudiantes/estudiantesDelete.validation.js";
+//imports inscripciones
+import InscripcionesController from "../../controllers/inscripcionesController.js";
+import inscripcionesFindAllValidation from "../../validators/inscripciones/inscripcionesFindAll.validation.js";
+import inscripcionesFindAllTransform from "../../transforms/inscripciones/inscripcionesFindAll.transform.js";
+import inscripcionesCreateValidation from "../../validators/inscripciones/inscripcionesCreate.validation.js";
+import inscripcionesUpdateValidation from "../../validators/inscripciones/inscripcionesUpdate.validation.js";
+import inscripcionesDeleteValidation from "../../validators/inscripciones/inscripcionesDelete.validation.js";
 
 const router = express.Router();
 const cursosController = new CursosController();
 
+//rutas cursos
 router.get("/cursos", [cursosFindAllValidation, cursosFindAllTransform], cursosController.findAll.bind(cursosController));
 router.post("/cursos", cursosCreateValidation, cursosController.create.bind(cursosController));
 router.put("/cursos/:cursoId", cursosUpdateValidation, cursosController.update.bind(cursosController));
@@ -29,6 +37,14 @@ router.get("/estudiantes", [estudiantesFindAllValidation, estudiantesFindAllTran
 router.post("/estudiantes", estudiantesCreateValidation, estudiantesController.create.bind(estudiantesController));
 router.put("/estudiantes/:estudianteId", estudiantesUpdateValidation, estudiantesController.update.bind(estudiantesController));
 router.delete("/estudiantes/:estudianteId", estudiantesDeleteValidation ,estudiantesController.delete.bind(estudiantesController));
+
+//rutas inscripciones
+const inscripcionesController = new InscripcionesController();
+
+router.get("/inscripciones", [inscripcionesFindAllValidation, inscripcionesFindAllTransform], inscripcionesController.findAll.bind(inscripcionesController));
+router.post("/inscripciones", inscripcionesCreateValidation, inscripcionesController.create.bind(inscripcionesController));
+router.put("/inscripciones/:inscripcionId", inscripcionesUpdateValidation, inscripcionesController.update.bind(inscripcionesController));
+router.delete("/inscripciones/:inscripcionId", inscripcionesDeleteValidation ,inscripcionesController.delete.bind(inscripcionesController));
 
 
 export { router };

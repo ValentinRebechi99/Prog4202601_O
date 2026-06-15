@@ -1,6 +1,6 @@
 import conexion from "./conexion.js"
 
-export default class EstudianteRepository {
+export default class InscripcionRepository {
     findall = async (filter,limit,offset,order) => {
         const client = await conexion.createConnection();
 
@@ -35,14 +35,16 @@ export default class EstudianteRepository {
         }
         
         let strSql = `
-            SELECT id_estudiante,
-                documento,
-                apellido,
-                nombres,
-                email,
-                fecha_nacimiento 
-            FROM public.estudiantes 
-            WHERE activo = 1
+            SELECT i.id_inscripcion,
+                i.id_curso, 
+                i.id_estudiante,
+                i.fecha_hora_inscripcion,
+                ie.descripcion  as estado,
+                i.id_usuario_modificacion,
+                i.fecha_hora_modificacion
+            FROM public.inscripciones i 
+            INNER JOIN inscripciones_estados ie on i.id_inscripcion_estado = ie.id_inscripcion_estado
+            WHERE i.id_inscripcion_estado=1;
             ${strWhere}
             ${strOrder}
             ${strLimit}
@@ -53,23 +55,20 @@ export default class EstudianteRepository {
         return rows;
     }
 
-    create = async (documento, apellido, nombres, email, fecha_nacimiento, activo, id_usuario_modificacion) => {
+    create = async (id_curso, id_estudiante, id_inscripcion_estado, id_usuario_modificacion) => {
         const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0]; 
         const strSql = `
-            INSERT INTO public.estudiantes
-            (documento, apellido, nombres, email, fecha_nacimiento, activo, id_usuario_modificacion, fecha_hora_modificacion)
-            VALUES($1, $2, $3, $4, $5, $6, $7, $8);
-            INSERT INTO public.cursos 
+            INSERT INTO public.inscripciones
+            (id_curso, id_estudiante, fecha_hora_inscripcion, id_inscripcion_estado, id_usuario_modificacion, fecha_hora_modificacion)
+            VALUES($1, $2, $3, $4, $5, $6);
         `;
         try {
             const parametros = [
-                documento,
-                apellido,
-                nombres,
-                email,
-                fecha_nacimiento,
-                activo,
+                id_curso,
+                id_estudiante,
+                fecha_modificacion,
+                id_inscripcion_estado,
                 id_usuario_modificacion,
                 fecha_modificacion
             ];
@@ -88,25 +87,23 @@ export default class EstudianteRepository {
 
 
 
-    update = async (idEstudiante,documento, apellido, nombres, email, fechaNacimiento, activo, idUsuarioModificacion) => {
+    update = async (idInscripcion,idCurso, idEstudiante, fechaHoraInscripcion, idInscripcionEstado, idUsuarioModificacion) => {
         const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         const strSql = `
-            UPDATE public.estudiantes
-            SET documento=$1, apellido=$2, nombres=$3, email=$4, fecha_nacimiento=$5, activo=$6, id_usuario_modificacion=$7, fecha_hora_modificacion=$8
-            WHERE id_estudiante=$9;
+            UPDATE public.inscripciones
+            SET id_curso=$1, id_estudiante=$2, fecha_hora_inscripcion=$3, id_inscripcion_estado=$4, id_usuario_modificacion=$5, fecha_hora_modificacion=$6
+            WHERE id_inscripcion=$7;
         `;
 
         const parametros = [
-            documento,
-            apellido,
-            nombres,
-            email,
-            fechaNacimiento,
-            activo,
+            idCurso,
+            idEstudiante,
+            fechaHoraInscripcion,
+            idInscripcionEstado,
             idUsuarioModificacion,
             fecha_modificacion,
-            idEstudiante
+            idInscripcion
         ];
 
         const { rows } = await client.query(strSql, parametros);
@@ -114,32 +111,31 @@ export default class EstudianteRepository {
         return rows;
     }
 
-    destroy = async (estudianteID, idUsuarioModificacion) => {
+    destroy = async (inscripcionId, idUsuarioModificacion) => {
         const client = await conexion.createConnection()
         const strSql = `
-        SELECT id_estudiante,
-                documento,
-                apellido,
-                nombres,
-                email,
-                fecha_nacimiento 
-            FROM public.estudiantes 
-            WHERE id_estudiante=$1;`
-        const { rows } = await client.query(strSql, [estudianteID]);
-        const estudiante = rows[0];
-        if (!estudiante) {
-            console.error("no hay curso");
+        SELECT id_inscripcion,
+            id_curso,
+            id_estudiante,
+            fecha_hora_inscripcion,
+            id_inscripcion_estado,
+            id_usuario_modificacion,
+            fecha_hora_modificacion
+        FROM public.inscripciones 
+        WHERE id_inscripcion=$1;`
+        const { rows } = await client.query(strSql, [inscripcionId]);
+        const inscripcion = rows[0];
+        if (!inscripcion) {
+            console.error("no hay inscripcion");
             return null;
         }
         const rowsUpdate = await this.update(
-            estudiante.id_estudiante,
-            estudiante.documento,
-            estudiante.apellido,
-            estudiante.nombres,
-            estudiante.email,
-            estudiante.fecha_nacimiento, 
-            0, 
-            idUsuarioModificacion
+            inscripcion.id_inscripcion,
+            inscripcion.id_curso,
+            inscripcion.id_estudiante,
+            inscripcion.fecha_hora_inscripcion,
+            2,
+            inscripcion.id_usuario_modificacion
         );
         client.release();
         return rowsUpdate;

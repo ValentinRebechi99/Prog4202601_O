@@ -1,8 +1,8 @@
-import EstudianteService from "../services/estudiante.service.js";
+import InscripcionService from "../services/inscripciones.service";
 
-class EstudiantesController {
+class InscripcionesController {
     constructor() {
-        this.servicio = new EstudianteService();
+        this.servicio = new InscripcionService
     }
 
     findAll = async (req, res) => {
@@ -21,12 +21,9 @@ class EstudiantesController {
         try {
             const { body } = req;
             const data = await this.servicio.create(
-                body.documento,
-                body.apellido, 
-                body.nombres, 
-                body.email, 
-                body.fecha_nacimiento, 
-                body.activo,
+                body.idCurso,
+                body.idEstudiante, 
+                body.idInscripcionEstado, 
                 1
             ); return res.status(201).send(data);
 
@@ -39,15 +36,14 @@ class EstudiantesController {
     update = async (req, res) => {
         try {
             const { body } = req;
-            const idEstudiante = req.params.idEstudiante;
-            const data = await this.servicio.update(idEstudiante,
-                body.documento,
-                body.apellido,
-                body.nombres,
-                body.email,
-                body.fechaNacimiento,
-                body.activo,
-                1);
+            const idInscripcion = req.params.idInscripcion;
+            const data = await this.servicio.update(idInscripcion,
+                body.idCurso,
+                body.idEstudiante,
+                body.fechaHoraInscripcion,
+                body.idInscripcionEstado, 
+                1,
+            );
             res.send(data);
         }
         catch (error) {
@@ -58,11 +54,11 @@ class EstudiantesController {
 
     delete = async (req, res) => {
         try{
-            const estudianteId = req.params.estudianteId;
-            if(!estudianteId) {
+            const inscripcionId = req.params.inscripcionIdId;
+            if(!inscripcionId) {
                 res.status(400).send({ status: "Fallo", data: { error: "El parámetro estudianteId no puede ser vacío." } });
             }
-            const data = await this.servicio.delete(parseInt(estudianteId),1);
+            const data = await this.servicio.delete(parseInt(inscripcionId),1);
             res.send(data);
         } catch (error) {
             console.error("Error en el controlador (update):", error);
@@ -71,4 +67,4 @@ class EstudiantesController {
     }
 }
 
-export default EstudiantesController;
+export default InscripcionesController;
