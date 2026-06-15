@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import { router as v1RouterCursos } from './routes/v1/cursosRoutes.js';
 import { router as v1RouterEstudiantes } from './routes/v1/estudiantesRoutes.js';
@@ -19,8 +20,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 const corsOptions = {
     origin: ['http://localhost:3000'], // Dominio permitido

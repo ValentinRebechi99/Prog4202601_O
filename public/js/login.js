@@ -35,8 +35,7 @@ const envio = document.getElementById("btnIncioSesion");
             const datos = await respuesta.json();
 
             localStorage.setItem('auth_token', datos.token);
-
-            console.log(datos);
+            document.cookie = `auth_token=${datos.token}; path=/; max-age=3600; SameSite=Strict`;
 
             alert("inicio de sesion correcto");
 
