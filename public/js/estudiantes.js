@@ -44,7 +44,7 @@ const mostrarEstudiantes = (datos) => {
             <td>${estudiante.nombres}</td>
             <td>${estudiante.email}</td>
             <td>${new Date(estudiante.fechaNacimiento).toLocaleDateString()}</td>
-            <td>Sí</td>
+
             <td>
                 <div class="boton-mod">
                     <a href="estudiantes-mod.html#${estudiante.idEstudiante}" class="btn btn-secondary">
