@@ -25,34 +25,48 @@ const cargarCursos = async () => {
     }
 };
 
-const filtrarCursos = () => {
+const filtrarCursos = async () => {
 
-    const buscar = document.getElementById("buscarCurso");
+    try {
 
-    const idBuscado = buscar
-        ? buscar.value.trim()
-        : "";
+        const idBuscado =
+            document.getElementById("buscarCurso").value.trim();
 
-    const estadoBuscado =
-        document.getElementById("estado").value;
+        const nombreBuscado =
+            document.getElementById("buscarNombre").value.trim();
 
-    const filtrados = cursos.filter(curso => {
+        const estadoBuscado =
+            document.getElementById("estado").value;
 
-        const coincideId =
-            idBuscado === "" ||
-            curso.id_curso
-                .toString()
-                .includes(idBuscado);
+        const params = new URLSearchParams();
 
-        const coincideEstado =
-            estadoBuscado === "" ||
-            (curso.id_curso_estado &&
-                curso.id_curso_estado.toString() === estadoBuscado);
+        if (idBuscado)
+            params.append("idCurso", idBuscado);
 
-        return coincideId && coincideEstado;
-    });
+        if (nombreBuscado)
+            params.append("nombre", nombreBuscado);
 
-    mostrarCursos(filtrados);
+        if (estadoBuscado)
+            params.append("idCursoEstado", estadoBuscado);
+        console.log(params.toString());
+        const respuesta = await fetch(
+            `http://localhost:3000/cursos?${params.toString()}`
+        );
+
+        if (!respuesta.ok) {
+            throw new Error();
+        }
+
+        const datos = await respuesta.json();
+        console.log(datos);
+        console.log(datos[0]);
+        mostrarCursos(datos);
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 };
 
 
@@ -65,7 +79,7 @@ const mostrarCursos = (datos) => {
     tabla.innerHTML = "";
 
     datos.forEach(curso => {
-
+        console.log(datos);
         const fila = document.createElement("tr");
 
         fila.innerHTML = `
@@ -95,7 +109,7 @@ const mostrarCursos = (datos) => {
             .addEventListener("click", async () => {
 
                 const confirmar = confirm(
-                    "¿Desea eliminar este curso?"
+                    "Â¿Desea eliminar este curso?"
                 );
 
                 if (!confirmar) return;
@@ -137,12 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const buscar = document.getElementById("buscarCurso");
     const estado = document.getElementById("estado");
 
-    if (buscar) {
-        buscar.addEventListener("input", filtrarCursos);
-    }
-
-    if (estado) {
-        estado.addEventListener("change", filtrarCursos);
-    }
+    document.getElementById("btnBuscar")
+        .addEventListener("click", filtrarCursos);
 
 });

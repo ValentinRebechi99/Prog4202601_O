@@ -23,7 +23,7 @@ const cursosFindAllTransform = (req, res, next) => {
     if (fechaInicio) filterObj.fechaInicio = fechaInicio;
     if (cantidadHoras) filterObj.cantidadHoras = parseInt(cantidadHoras);
     if (inscriptosMax) filterObj.inscriptosMax = parseInt(inscriptosMax);
-    if (idCursoEstado) filterObj.idCursoEstado = parseInt(idCursoEstado);
+    if (idCursoEstado) filterObj.idCursoEstado   = parseInt(idCursoEstado);
     if (order){
         orderObj[order] = asc === "true" ? "ASC" : "DESC";
     } else { 
