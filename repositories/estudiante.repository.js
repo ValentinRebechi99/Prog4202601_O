@@ -1,6 +1,6 @@
 import conexion from "./conexion.js"
 
-export default class CursoRepository {
+export default class EstudianteRepository {
     findall = async (filter,limit,offset,order) => {
         const client = await conexion.createConnection();
 

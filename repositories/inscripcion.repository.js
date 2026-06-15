@@ -1,6 +1,6 @@
 import conexion from "./conexion.js"
 
-export default class CursoRepository {
+export default class InscripcionRepository {
     findall = async (filter,limit,offset,order) => {
         const client = await conexion.createConnection();
 
@@ -35,17 +35,16 @@ export default class CursoRepository {
         }
         
         let strSql = `
-            SELECT c.id_curso,
-                c.nombre,
-                c.descripcion,
-                c.fecha_inicio,
-                c.cantidad_horas,
-                c.inscriptos_max,
-                c.fecha_hora_modificacion
-                ,ce.descripcion AS estado
-            FROM public.cursos c 
-            INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado 
-            WHERE c.id_curso_estado != 4
+            SELECT i.id_inscripcion,
+                i.id_curso, 
+                i.id_estudiante,
+                i.fecha_hora_inscripcion,
+                ie.descripcion  as estado,
+                i.id_usuario_modificacion,
+                i.fecha_hora_modificacion
+            FROM public.inscripciones i 
+            INNER JOIN inscripciones_estados ie on i.id_inscripcion_estado = ie.id_inscripcion_estado
+            WHERE i.id_inscripcion_estado=1;
             ${strWhere}
             ${strOrder}
             ${strLimit}
@@ -56,23 +55,20 @@ export default class CursoRepository {
         return rows;
     }
 
-    create = async (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_maximos,id_curso_estado=1, id_usuario_modificacion) => {
+    create = async (id_curso, id_estudiante, id_inscripcion_estado, id_usuario_modificacion) => {
         const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0]; 
         const strSql = `
-            INSERT INTO public.cursos 
-            (nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion, fecha_hora_modificacion) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-            RETURNING id_curso;
+            INSERT INTO public.inscripciones
+            (id_curso, id_estudiante, fecha_hora_inscripcion, id_inscripcion_estado, id_usuario_modificacion, fecha_hora_modificacion)
+            VALUES($1, $2, $3, $4, $5, $6);
         `;
         try {
             const parametros = [
-                nombre,
-                descripcion,
-                fecha_inicio,
-                cantidad_horas,
-                inscriptos_maximos,
-                id_curso_estado,
+                id_curso,
+                id_estudiante,
+                fecha_modificacion,
+                id_inscripcion_estado,
                 id_usuario_modificacion,
                 fecha_modificacion
             ];
@@ -91,25 +87,23 @@ export default class CursoRepository {
 
 
 
-    update = async (cursoId, nombre, descripcion, fecha_inicio, cantidad_horas, inscriptos_max, id_curso_estado, id_usuario_modificacion) => {
+    update = async (idInscripcion,idCurso, idEstudiante, fechaHoraInscripcion, idInscripcionEstado, idUsuarioModificacion) => {
         const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         const strSql = `
-            UPDATE public.cursos 
-            SET nombre=$1, descripcion=$2, fecha_inicio=$3, cantidad_horas=$4, inscriptos_max=$5, id_curso_estado=$6, id_usuario_modificacion=$7, fecha_hora_modificacion=$8 
-            WHERE id_curso=$9;
+            UPDATE public.inscripciones
+            SET id_curso=$1, id_estudiante=$2, fecha_hora_inscripcion=$3, id_inscripcion_estado=$4, id_usuario_modificacion=$5, fecha_hora_modificacion=$6
+            WHERE id_inscripcion=$7;
         `;
 
         const parametros = [
-            nombre,
-            descripcion,
-            fecha_inicio,
-            cantidad_horas,
-            inscriptos_max,
-            id_curso_estado,
-            id_usuario_modificacion,
+            idCurso,
+            idEstudiante,
+            fechaHoraInscripcion,
+            idInscripcionEstado,
+            idUsuarioModificacion,
             fecha_modificacion,
-            cursoId
+            idInscripcion
         ];
 
         const { rows } = await client.query(strSql, parametros);
@@ -117,24 +111,31 @@ export default class CursoRepository {
         return rows;
     }
 
-    destroy = async (cursoId, idUsuarioModificacion) => {
+    destroy = async (inscripcionId, idUsuarioModificacion) => {
         const client = await conexion.createConnection()
-        const strSql = 'SELECT c.id_curso, c.nombre, c.descripcion, c.fecha_inicio, c.cantidad_horas, c.inscriptos_max, c.fecha_hora_modificacion, ce.descripcion AS estado FROM public.cursos c INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado WHERE c.id_curso = $1;';
-        const { rows } = await client.query(strSql, [cursoId]);
-        const curso = rows[0];
-        if (!curso) {
-            console.error("no hay curso");
+        const strSql = `
+        SELECT id_inscripcion,
+            id_curso,
+            id_estudiante,
+            fecha_hora_inscripcion,
+            id_inscripcion_estado,
+            id_usuario_modificacion,
+            fecha_hora_modificacion
+        FROM public.inscripciones 
+        WHERE id_inscripcion=$1;`
+        const { rows } = await client.query(strSql, [inscripcionId]);
+        const inscripcion = rows[0];
+        if (!inscripcion) {
+            console.error("no hay inscripcion");
             return null;
         }
         const rowsUpdate = await this.update(
-            curso.id_curso,
-            curso.nombre,
-            curso.descripcion,
-            curso.fecha_inicio,
-            curso.cantidad_horas,
-            curso.inscriptos_max,
-            4,
-            idUsuarioModificacion
+            inscripcion.id_inscripcion,
+            inscripcion.id_curso,
+            inscripcion.id_estudiante,
+            inscripcion.fecha_hora_inscripcion,
+            2,
+            inscripcion.id_usuario_modificacion
         );
         client.release();
         return rowsUpdate;

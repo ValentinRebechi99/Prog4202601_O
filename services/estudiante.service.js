@@ -11,7 +11,8 @@ export default class EstudianteService extends BaseService {
         email: 'email',
         fechaNacimiento: 'fecha_nacimiento',
         activo: 'activo',
-        idUsuarioModificacion: 'id_usuario_modificacion'
+        idUsuarioModificacion: 'id_usuario_modificacion',
+        fechaHoraModificacion: 'fecha_hora_modificacion'
     };
 
     constructor() {
