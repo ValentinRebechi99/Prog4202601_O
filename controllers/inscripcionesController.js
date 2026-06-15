@@ -1,4 +1,4 @@
-import InscripcionService from "../services/inscripciones.service";
+import InscripcionService from "../services/inscripciones.service.js";
 
 class InscripcionesController {
     constructor() {

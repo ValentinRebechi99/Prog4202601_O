@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
+    <script src="./js/login.js" type="module" defer></script>
 </head>
 
 <body>
@@ -18,18 +19,19 @@
             <img src="./img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
         </div>
     </header>
-    
+            <div class="alert alert-danger d-none" id="ErrorServer" role="alert">
+            </div>
             <form action="" method="post" class="loginform">
 
 
                 <div class="container">
                     <label for="uname"><b>Usuario</b></label>
-                    <input type="text" placeholder="Usuario" name="name" required>
+                    <input type="text" placeholder="Usuario" id="name" required>
 
                     <label for="psw"><b>Contraseña</b></label>
-                    <input type="password" placeholder="Contraseña" name="psw" required>
+                    <input type="password" placeholder="Contraseña" id="pwd" required>
 
-                    <button type="submit">Iniciar Sesion</button>
+                    <button type="submit" id="btnIncioSesion">Iniciar Sesion</button>
                     <span class="psw">Recuperar <a href="#">contraseña?</a></span>
                 </div>
 

@@ -8,13 +8,10 @@ export default class CursoRepository {
         let strOrder = '';
         let strLimit = '';
         let strOffset = '';
-        console.log("filter recibido:", filter);
 
         if (filter && Object.keys(filter).length > 0) {
 
             Object.entries(filter).forEach(([key, value]) => {
-                console.log("KEY:", key);
-                console.log("VALUE:", value);
                 if (typeof value === 'string') {
                     strWhere += `AND c.${key} ILIKE '%${value}%' `
                 } else {
@@ -22,7 +19,6 @@ export default class CursoRepository {
                 }
             });
         }
-        console.log("strWhere:", strWhere);
         if (order && Object.keys(order).length > 0) {
             Object.entries(order).forEach(([key, value]) => {
                 strOrder += `${key} ${value}, `
@@ -55,8 +51,6 @@ export default class CursoRepository {
             ${strLimit}
             ${strOffset};        
         `;
-        console.log(filter);
-        console.log(strSql);
         const { rows } = await client.query(strSql);
         client.release();
         return rows;

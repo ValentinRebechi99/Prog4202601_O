@@ -22,13 +22,10 @@ export default class CursoService extends BaseService {
     }
 
     async findall(filter, limit, offset, order) {
-        console.log("filter original:", filter);
         const sqlFilter = this.mapKeysToColumns(filter, CursoService.KEYS_MAP);
-        console.log("sqlFilter:", sqlFilter);
         const sqlOrder = this.mapKeysToColumns(order, CursoService.KEYS_MAP);
         const respuestaBD = await this.repository.findall(sqlFilter, limit, offset, sqlOrder);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
-        console.log(filter);
         return respuesta;
     }
 

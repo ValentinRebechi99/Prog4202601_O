@@ -1,9 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { router as v1Router } from './routes/v1/Routes.js';
+import { router as v1RouterCursos } from './routes/v1/cursosRoutes.js';
+import { router as v1RouterEstudiantes } from './routes/v1/estudiantesRoutes.js';
+import { router as v1RouterInscripciones } from './routes/v1/inscripcionesRoutes.js';
+import { router as v1RouterAuth } from "./routes/v1/authRoutes.js";
+import { router as v1RouterViews } from "./routes/v1/viewsRoutes.js"
+
+import helmet from 'helmet';
+import passport from "passport";
+import { localStrategy, jwtStrategy } from "./config/passport.js";
 
 const app = express();
 
@@ -12,41 +19,24 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
-app.use(express.static(__dirname)); 
-
-app.use(cors());
-app.use("/", v1Router);
-
-const rutaArchivo = path.join(__dirname, 'estudiantes.json');
-
-app.post('/api/guardar-estudiante', (req, res) => {
-    const nuevoEstudiante = req.body;
-
-    fs.readFile(rutaArchivo, 'utf8', (err, data) => {
-        let estudiantes = [];
-
-        if (!err && data) {
-            try {
-                estudiantes = JSON.parse(data);
-            } catch (e) {
-                console.error("Error al parsear el JSON existente, se reescribirá.");
-            }
-        }
-
-        estudiantes.push(nuevoEstudiante);
-
-        fs.writeFile(rutaArchivo, JSON.stringify(estudiantes, null, 2), 'utf8', (errEscribir) => {
-            if (errEscribir) {
-                console.error(errEscribir);
-                return res.status(500).json({ error: 'No se pudo escribir en el archivo.' });
-            }
-            
-            res.json({ mensaje: '¡Estudiante guardado con éxito en estudiantes.json!' });
-        });
-    });
-});
-
+app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const corsOptions = {
+    origin: ['http://localhost:3000'], // Dominio permitido
+    optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use("/", v1RouterAuth);
+app.use("/", v1RouterViews);
+app.use("/", v1RouterCursos);
+app.use("/", v1RouterEstudiantes);
+app.use("/", v1RouterInscripciones);
+
 
 app.listen(3000, () => {
     console.log('Servidor corriendo en http://localhost:3000');
