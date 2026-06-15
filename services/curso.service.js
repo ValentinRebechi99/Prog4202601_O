@@ -13,7 +13,8 @@ export default class CursoService extends BaseService {
         idCursoEstado: 'id_curso_estado',
         estado: 'estado',
         idUsuarioModificacion: 'id_usuario_modificacion',
-        fechaHoraModificacion: 'fecha_hora_modificacion'
+        fechaHoraModificacion: 'fecha_hora_modificacion',
+        inscriptos: 'inscriptos'
     };
 
     constructor() {

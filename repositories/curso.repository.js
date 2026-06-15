@@ -42,7 +42,12 @@ export default class CursoRepository {
                 c.cantidad_horas,
                 c.inscriptos_max,
                 c.fecha_hora_modificacion
-                ,ce.descripcion AS estado
+                ,ce.descripcion AS estado,
+                (
+                    SELECT COUNT(*) 
+                    FROM public.inscripciones i 
+                    WHERE i.id_curso  = c.id_curso
+                ) AS inscriptos
             FROM public.cursos c 
             INNER JOIN public.cursos_estados ce ON c.id_curso_estado = ce.id_curso_estado 
             WHERE c.id_curso_estado != 4
@@ -52,6 +57,7 @@ export default class CursoRepository {
             ${strOffset};        
         `;
         const { rows } = await client.query(strSql);
+        console.log(JSON.stringify(rows));
         client.release();
         return rows;
     }

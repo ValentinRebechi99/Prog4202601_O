@@ -9,5 +9,6 @@ export default class CursoResponseDTO {
         this.estado = curso.estado;
         this.idUsuarioModificacion = curso.id_usuario_modificacion;
         this.fechaHoraModificacion = curso.fecha_hora_modificacion;
+        this.inscriptos = curso.inscriptos
     }
 }
