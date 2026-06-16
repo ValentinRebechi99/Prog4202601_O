@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado de Finalización</title>
+    <!-- Enlace a Bootstrap 5 -->
+    
+    <style>
+
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .certificado-container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .certificado {
+            background: #fff;
+            border: 20px solid #d4af37; /* Marco dorado */
+            border-radius: 5px;
+            padding: 60px 40px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .certificado::before {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 2px solid #d4af37;
+        }
+
+        .titulo {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: #d4af37;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            font-size: 1.2rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .presenta {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .nombre {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            border-bottom: 2px solid #d4af37;
+            display: inline-block;
+            padding: 0 40px 10px 40px;
+            margin-bottom: 30px;
+        }
+
+        .texto-logro {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+            line-height: 1.6;
+        }
+
+        .firmas-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 60px;
+        }
+
+        .firma-bloque {
+            width: 250px;
+        }
+
+        .firma-linea {
+            border-bottom: 1px solid #999;
+            margin-bottom: 10px;
+        }
+
+        .firma-cargo {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Estilos para impresión */
+        @media print {
+            body {
+                background: none;
+            }
+            .certificado-container {
+                padding: 0;
+                max-width: 100%;
+            }
+            .certificado {
+                box-shadow: none;
+                border: 15px solid #d4af37;
+                padding: 50px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="certificado-container">
+        <div class="certificado">
+            
+            <div class="titulo">Certificado</div>
+            <div class="subtitulo">De Finalización</div>
+
+            <div class="presenta">Se otorga el presente a:</div>
+            
+            <div class="nombre">{{apellido}}, {{nombre}}</div>
+            <div class="texto-logro">DNI: {{dni}}</div>
+
+            <div class="texto-logro">
+                Por haber completado satisfactoriamente el curso 
+                <strong>"{{nombre_curso}}"</strong>, demostrando conocimientos y habilidades excepcionales.
+            </div>
+
+            <div class="firmas-container">
+                <div class="firma-bloque">
+                    <div class="firma-linea"></div>
+                    <strong>John Doe</strong>
+                    <div class="firma-cargo">Instructor</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

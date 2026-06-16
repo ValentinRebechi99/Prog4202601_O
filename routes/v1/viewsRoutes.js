@@ -2,6 +2,7 @@ import express from "express";
 import passport from 'passport';
 import path from "path";
 import { fileURLToPath } from "url";
+import { pdfController } from "../../controllers/pdfController.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -86,5 +87,7 @@ router.get("/estudiantes.html", (req, res) => {
 router.get("/login.html", (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'login.html'));
 });
+
+router.get("/pruebapdf", pdfController);
 
 export { router };
