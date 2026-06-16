@@ -9,7 +9,6 @@ const __dirname = path.dirname(__filename);
 
 export const pdfController = async (req, res) => {
     try {
-        // localhost:3000/pruebapdf?nombre=algo&curso=algomagico2&dni=41423213124
         const { body } = req;
         const dynamicData = {
             nombre: body.nombre,
@@ -45,7 +44,7 @@ export const pdfController = async (req, res) => {
         await browser.close();
 
         res.contentType("application/pdf");
-        res.setHeader("Content-Disposition", "attachment; filename=certificado.pdf");
+        res.setHeader("Content-Disposition", `attachment; filename=${body.apellido}_certificado.pdf`);
         return res.send(pdfBuffer);
 
     } catch (error) {

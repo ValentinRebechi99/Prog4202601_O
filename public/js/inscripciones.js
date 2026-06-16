@@ -136,7 +136,7 @@ const mostrarEstudiantes = (datos) => {
                 const urlPdf = URL.createObjectURL(blob);
                 const enlaceDescarga = document.createElement("a");
                 enlaceDescarga.href = urlPdf;
-                enlaceDescarga.download = `Certificado_${item.apellido}_${item.nombres}.pdf`;
+                enlaceDescarga.download = `Certificado_${item.apellido}_${item.nombres.replaceAll(" ", "_")}.pdf`;
                 document.body.appendChild(enlaceDescarga);
                 enlaceDescarga.click();
                 document.body.removeChild(enlaceDescarga);
