@@ -44,7 +44,7 @@ const iniciar = () => {
 
             const datos = await respuesta.json();
 
-            console.log(datos);
+        
 
             alert("Estudiante guardado correctamente");
 

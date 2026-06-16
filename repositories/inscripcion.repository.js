@@ -1,99 +1,102 @@
 import conexion from "./conexion.js"
 
 export default class InscripcionRepository {
-    findall = async (filter,limit,offset,order) => {
+    findall = async (filter, limit, offset, order) => {
         const client = await conexion.createConnection();
 
         let strWhere = '';
         let strOrder = '';
         let strLimit = '';
         let strOffset = '';
-        
+
         if (filter && Object.keys(filter).length > 0) {
             Object.entries(filter).forEach(([key, value]) => {
                 if (typeof value === 'string') {
-                    strWhere += `AND ${key} LIKE '%${value}%'`
+                    strWhere += ` AND ${key} LIKE '%${value}%'`;
                 } else {
-                    strWhere += `AND ${key} = ${value}`
+                    strWhere += ` AND ${key} = ${value}`;
                 }
             });
         }
 
         if (order && Object.keys(order).length > 0) {
             Object.entries(order).forEach(([key, value]) => {
-                strOrder += `${key} ${value}, `
+                strOrder += `${key} ${value}, `;
             });
-            strOrder = `ORDER BY ${strOrder.slice(0, -2)} `
+            strOrder = `ORDER BY ${strOrder.slice(0, -2)} `;
         }
 
-        if (limit) {
-            strLimit = `LIMIT ${limit} `
-        }
+        if (limit) strLimit = `LIMIT ${limit} `;
+        if (offset) strOffset = `OFFSET ${offset} `;
 
-        if (offset) {
-            strOffset = `OFFSET ${offset} `
-        }
-        
         let strSql = `
-            SELECT i.id_inscripcion,
-                i.id_curso, 
+            SELECT 
+                i.id_inscripcion,
+                i.id_curso,
                 i.id_estudiante,
-                i.fecha_hora_inscripcion,
-                ie.descripcion  as estado,
-                i.id_usuario_modificacion,
-                i.fecha_hora_modificacion
-            FROM public.inscripciones i 
-            INNER JOIN inscripciones_estados ie on i.id_inscripcion_estado = ie.id_inscripcion_estado
-            WHERE i.id_inscripcion_estado=1;
+                e.documento,
+                e.apellido,
+                e.nombres
+            FROM public.inscripciones i
+            INNER JOIN public.estudiantes e 
+                ON e.id_estudiante = i.id_estudiante
+            INNER JOIN inscripciones_estados ie 
+                ON i.id_inscripcion_estado = ie.id_inscripcion_estado
+            WHERE i.id_inscripcion_estado = 1
             ${strWhere}
             ${strOrder}
             ${strLimit}
-            ${strOffset};        
+            ${strOffset};
         `;
-        const {rows} = await client.query(strSql);
+
+        const { rows } = await client.query(strSql);
         client.release();
         return rows;
-    }
+    };
 
     create = async (id_curso, id_estudiante, id_inscripcion_estado, id_usuario_modificacion) => {
         const client = await conexion.createConnection()
-        const fecha_modificacion = new Date().toISOString().split('T')[0]; 
+        const fecha = new Date().toISOString();
         const strSql = `
             INSERT INTO public.inscripciones
             (id_curso, id_estudiante, fecha_hora_inscripcion, id_inscripcion_estado, id_usuario_modificacion, fecha_hora_modificacion)
-            VALUES($1, $2, $3, $4, $5, $6);
+            VALUES($1, $2, $3, $4, $5, $6)
+            RETURNING id_inscripcion;
         `;
         try {
             const parametros = [
                 id_curso,
                 id_estudiante,
-                fecha_modificacion,
+                fecha,
                 id_inscripcion_estado,
                 id_usuario_modificacion,
-                fecha_modificacion
+                fecha
             ];
-        
+
             const { rows } = await client.query(strSql, parametros);
-            const nuevoId = rows[0].id_curso;
-            const response = await this.findById(nuevoId);
+
+
             client.release();
-            return response;
+
+            return rows[0];
         }
-        catch(error) {
+        catch (error) {
             client.release();
-            console.error("Error en el controlador (create):", error);
+            console.error("Error en create:", error);
+            throw error;
         }
     }
 
 
 
-    update = async (idInscripcion,idCurso, idEstudiante, fechaHoraInscripcion, idInscripcionEstado, idUsuarioModificacion) => {
+    update = async (idInscripcion, idCurso, idEstudiante, fechaHoraInscripcion, idInscripcionEstado, idUsuarioModificacion) => {
         const client = await conexion.createConnection()
         const fecha_modificacion = new Date().toISOString().split('T')[0];
         const strSql = `
             UPDATE public.inscripciones
             SET id_curso=$1, id_estudiante=$2, fecha_hora_inscripcion=$3, id_inscripcion_estado=$4, id_usuario_modificacion=$5, fecha_hora_modificacion=$6
-            WHERE id_inscripcion=$7;
+            WHERE id_inscripcion=$7
+            RETURNING *;
         `;
 
         const parametros = [

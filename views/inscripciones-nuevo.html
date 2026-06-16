@@ -4,17 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto FCAD- UNER</title>
+    <title>Nueva Inscripcion FCAD- UNER</title>
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
+    <script src="./js/inscripciones-nuevo.js" type="module" defer></script>
+
+
 </head>
 
 <body>
 
     <header>
         <div class="contenedor">
-            <h1>Contacto FCAD- UNER</h1>
+            <h1>Nueva inscripcion FCAD- UNER</h1>
             <img src="./img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
         </div>
     </header>
@@ -31,13 +34,23 @@
 
         </nav>
 
-
         <main>
+            <h2>Crear nueva Inscripcion</h2>
+            <div class="alert alert-danger d-none" id="ErrorServer" role="alert">
+                Error interno del servidor
+            </div>
+            <form id="formInscripcion">
+                <select id="idCurso" class="form-control"></select>
 
-            Información de contacto para la Facultad de Ciencias de la Administración. Aquí puedes agregar detalles como
-            dirección, número de teléfono, correo electrónico y cualquier otro medio de contacto relevante para que los
-            estudiantes o interesados puedan comunicarse con la facultad.
+                <select id="idEstudiante" class="form-control"></select>
+
+                <button id="btnGuardarInscripcion" class="btn btn-primary">
+                    Crear inscripción
+                </button>
+            </form>
+
         </main>
+
     </div>
     <footer>
         <p>&copy; 2026 Prog4202601_O . All rights reserved.</p>

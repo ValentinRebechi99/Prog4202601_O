@@ -40,7 +40,7 @@ const cargarCursos = async () => {
         }
 
         cursos = await respuesta.json();
-        console.log(cursos);
+       
         mostrarCursos(cursos);
 
     } catch (error) {
@@ -82,7 +82,7 @@ const filtrarCursos = async () => {
             params.append("idCursoEstado", estadoBuscado);
         params.append("limit", limit);
         params.append("offset", (pagina * limit));
-        console.log(params.toString());
+        
         const respuesta = await fetch(
             `http://localhost:3000/cursos?${params.toString()}`
         );
@@ -92,8 +92,7 @@ const filtrarCursos = async () => {
         }
 
         const datos = await respuesta.json();
-        console.log(datos);
-        console.log(datos[0]);
+     
         mostrarCursos(datos);
 
     } catch (error) {

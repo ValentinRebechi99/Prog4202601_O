@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./css/estiloTablaContenido.css">
-    <script src="./js/estudiantes.js" type="module" defer></script>
+    <script src="./js/inscripciones.js" type="module" defer></script>
 </head>
 
 <body>
     <header>
         <div class="contenedor">
-            <h1>Estudiantes FCAD- UNER</h1>
+            <h1>Inscripciones FCAD- UNER</h1>
             <img src="./img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
         </div>
     </header>
@@ -36,15 +36,16 @@
         <main>
             <div class="contenedor-cursos">
                 <div class="header-seccion">
-                    <h2>Estudiantes</h2>
+                    <h2>Inscripciones</h2>
                     <div class="boton-nuevo">
-                        <a href="estudiantes-nuevo.html" class="btn btn-secondary">+Nuevo Estudiante</a>
+                        <a href="inscripciones-nuevo.html" class="btn btn-secondary">+Nueva Inscripcion</a>
                     </div>
 
                 </div>
 
-                <input type="text" id="buscardni" placeholder="Buscar por DNI">
-
+                <select id="selectCurso" class="form-control">
+                    <option value="">Seleccione un curso</option>
+                </select>
                 <button id="btnBuscar" class="btn btn-primary">buscar</button>
 
 
@@ -54,22 +55,22 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Documento</th>
+
+                                <th>DNI</th>
                                 <th>Apellido</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Fecha Nacimiento</th>
+
 
                             </tr>
                         </thead>
-                        <tbody id="tbodyEstudiantes"> </tbody>
+                        <tbody id="tbodyInscripciones"> </tbody>
                     </table>
 
                     <div class="footer-tabla">
+
                         <div class="paginacion">
-                            <button id="ButtonBack">← Ant</button>
-                            <a id="NumberPage"></a>
-                            <button id="ButtonNext">Sig →</button>
+                            <button disabled>← Ant</button>
+                            <span>1/1</span>
+                            <button disabled>Sig →</button>
                         </div>
                     </div>
                 </div>

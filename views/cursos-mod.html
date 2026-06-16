@@ -1,103 +1,105 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar curso - FCAD- UNER</title>
     <link rel="stylesheet" href="./css/estilo.css">
-     <link rel="stylesheet" href="./css/bootstrap.min.css">
-     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
-     
-     
-     <script src="./js/cursos-mod.js" type="module" defer></script>
-    </head>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
+
+
+    <script src="./js/cursos-mod.js" type="module" defer></script>
+</head>
+
 <body>
 
     <header>
         <div class="contenedor">
-             <h1>Modificar curso - FCAD- UNER</h1>
-            <img src="./img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración"> 
+            <h1>Modificar curso - FCAD- UNER</h1>
+            <img src="./img/Logo.png" alt="Logo de la Facultad de Ciencias de la Administración">
         </div>
     </header>
     <div class="contenedor-principal ">
         <nav>
             <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="cursos.html">Cursos</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="estudiantes.html">Estudiantes</a></li>
-               
-              </ul>
-    
-        
-         </nav>
-   
-       
- <main>
-   
-        <h2>Modificar curso</h2>
-        <div class="alert alert-danger d-none" id="ErrorServer" role="alert">
-            Error interno del servidor
-        </div>
-        <form id="formCurso">
-            <div class="form-group">
-                <label for="nombre">Nombre del curso:</label>
-                <input type="text" id="nombre" class="form-control" required>
-                <div class="invalid-feedback">
-                    el nombre del curso es necesario
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="descripcion" class="form-label">Descripción:</label>
-                <textarea id="descripcion" class="form-control" required></textarea>
-                <div class="invalid-feedback">
-                    la descripcion del curso es necesaria
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
-                <input type="date" id="fechaInicio" class="form-control" required>
-                <div class="invalid-feedback">
-                    la fecha de inicio es necesaria
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="cantidadHoras" class="form-label">Cantidad de Horas:</label>
-                <input type="number" id="cantidadHoras" class="form-control" required>
-                <div class="invalid-feedback">
-                    la cantidad de horas es necesaria y debe ser mayor que 0
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="cantidadInscriptos" class="form-label">Cantidad de Inscriptos:</label>
-                <input type="number" id="cantidadInscriptos" class="form-control" required>
-                <div class="invalid-feedback">
-                    la cantidad de inscriptos es necesario y debe ser mayor que 0
-                </div>
-            </div>
-             <div class="form-group">
-                <label for="estado" class="form-label">Estado:</label>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+            </ul>
 
-                <select id="estado" class="form-control" required>
 
-                    <option value="1">BORRADOR</option>
+        </nav>
 
-                    <option value="2">INSCRIPCIÓN ABIERTA</option>
 
-                    <option value="3">INSCRIPCIÓN CERRADA</option>
+        <main>
 
-                    <option value="4">ELIMINADO</option>
-
-                </select>
-                <div class="invalid-feedback">
-                    Seleccione un valor valido para el estado
-                </div>
+            <h2>Modificar curso</h2>
+            <div class="alert alert-danger d-none" id="ErrorServer" role="alert">
+                Error interno del servidor
             </div>
-            <button type="submit" id="btnGuardarCurso" class="btn btn-primary">Guardar Curso</button>
-        </form>
-</main>
+            <form id="formCurso">
+                <div class="form-group">
+                    <label for="nombre">Nombre del curso:</label>
+                    <input type="text" id="nombre" class="form-control" required>
+                    <div class="invalid-feedback">
+                        el nombre del curso es necesario
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion" class="form-label">Descripción:</label>
+                    <textarea id="descripcion" class="form-control" required></textarea>
+                    <div class="invalid-feedback">
+                        la descripcion del curso es necesaria
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
+                    <input type="date" id="fechaInicio" class="form-control" required>
+                    <div class="invalid-feedback">
+                        la fecha de inicio es necesaria
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cantidadHoras" class="form-label">Cantidad de Horas:</label>
+                    <input type="number" id="cantidadHoras" class="form-control" required>
+                    <div class="invalid-feedback">
+                        la cantidad de horas es necesaria y debe ser mayor que 0
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cantidadInscriptos" class="form-label">Cantidad de Inscriptos:</label>
+                    <input type="number" id="cantidadInscriptos" class="form-control" required>
+                    <div class="invalid-feedback">
+                        la cantidad de inscriptos es necesario y debe ser mayor que 0
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="estado" class="form-label">Estado:</label>
+
+                    <select id="estado" class="form-control" required>
+
+                        <option value="1">BORRADOR</option>
+
+                        <option value="2">INSCRIPCIÓN ABIERTA</option>
+
+                        <option value="3">INSCRIPCIÓN CERRADA</option>
+
+                        <option value="4">ELIMINADO</option>
+
+                    </select>
+                    <div class="invalid-feedback">
+                        Seleccione un valor valido para el estado
+                    </div>
+                </div>
+                <button type="submit" id="btnGuardarCurso" class="btn btn-primary">Guardar Curso</button>
+            </form>
+        </main>
     </div>
-<footer>
+    <footer>
         <p>&copy; 2026 Prog4202601_O . All rights reserved.</p>
-    </footer>    
+    </footer>
 </body>

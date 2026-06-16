@@ -9,17 +9,17 @@ const router = express.Router();
 
 const requireJWT = (req, res, next) => {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
-      if (err) {
-        return next(err);
-      }
-  
-      if (!user) {
-        const rutaAlError = path.join(__dirname, '..', '..', 'errors', '401.html');
-        return res.status(401).sendFile(rutaAlError);
-      }
-  
-      req.user = user;
-      next();
+        if (err) {
+            return next(err);
+        }
+
+        if (!user) {
+            const rutaAlError = path.join(__dirname, '..', '..', 'errors', '401.html');
+            return res.status(401).sendFile(rutaAlError);
+        }
+
+        req.user = user;
+        next();
     })(req, res, next);
 };
 
@@ -87,4 +87,11 @@ router.get("/login.html", (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'login.html'));
 });
 
+router.get("/inscripciones.html", (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'views', 'inscripciones.html'));
+});
+
+router.get("/inscripciones-nuevo.html", (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'views', 'inscripciones-nuevo.html'));
+});
 export { router };
