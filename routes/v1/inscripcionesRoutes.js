@@ -13,7 +13,7 @@ const inscripcionesController = new InscripcionesController();
 
 router.get("/inscripciones", passport.authenticate('jwt', { session: false }), [inscripcionesFindAllValidation, inscripcionesFindAllTransform], inscripcionesController.findAll.bind(inscripcionesController));
 router.post("/inscripciones", passport.authenticate('jwt', { session: false }), inscripcionesCreateValidation, inscripcionesController.create.bind(inscripcionesController));
-router.put("/inscripciones/:inscripcionId", passport.authenticate('jwt', { session: false }), inscripcionesUpdateValidation, inscripcionesController.update.bind(inscripcionesController));
+//router.put("/inscripciones/:inscripcionId", passport.authenticate('jwt', { session: false }), inscripcionesUpdateValidation, inscripcionesController.update.bind(inscripcionesController));
 router.delete("/inscripciones/:inscripcionId", passport.authenticate('jwt', { session: false }), inscripcionesDeleteValidation ,inscripcionesController.delete.bind(inscripcionesController));
 
 
