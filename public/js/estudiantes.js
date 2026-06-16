@@ -1,12 +1,39 @@
 let estudiantes = [];
 
+var pagina = 0;
+const limit = 4;
+document.getElementById("NumberPage").textContent = pagina + 1;
+const ButtonBack = document.getElementById("ButtonBack");
+const ButtonNext = document.getElementById("ButtonNext");
+
+ButtonBack.addEventListener("click", async (evt) => {
+    if (pagina != 0) {
+        pagina = pagina - 1;
+    }
+    document.getElementById("NumberPage").textContent = pagina + 1;
+    if (document.getElementById("buscardni").value.trim() == "") {
+        cargarEstudiantes();
+    } else {
+        filtrarEstudiantes();
+    }
+});
+
+ButtonNext.addEventListener("click", async (evt) => {
+    pagina = pagina + 1;
+    document.getElementById("NumberPage").textContent = pagina + 1;
+    if (document.getElementById("buscardni").value.trim() == "") {
+        cargarEstudiantes();
+    } else {
+        filtrarEstudiantes();
+    }
+});
 
 const cargarEstudiantes = async () => {
 
     try {
 
         const respuesta = await fetch(
-            "http://localhost:3000/estudiantes"
+            `http://localhost:3000/estudiantes?limit=${limit}&offset=${pagina*limit}`
         );
 
         if (!respuesta.ok) {
@@ -28,6 +55,13 @@ const cargarEstudiantes = async () => {
     }
 };
 
+// el uso de esta funcion es para arreglar un problema de paginacion
+const pipeFiltrar = async () => {
+    pagina = 0;
+    document.getElementById("NumberPage").textContent = pagina + 1;
+    filtrarEstudiantes();
+}
+
 const filtrarEstudiantes = async () => {
 
     try {
@@ -40,7 +74,8 @@ const filtrarEstudiantes = async () => {
         if (dniBuscado) {
             params.append("documento", dniBuscado);
         }
-
+        params.append("limit", limit);
+        params.append("offset", (pagina * limit));
         const respuesta = await fetch(
             `http://localhost:3000/estudiantes?${params.toString()}`
         );
@@ -135,6 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarEstudiantes();
 
     document.getElementById("btnBuscar")
-        .addEventListener("click", filtrarEstudiantes);
+        .addEventListener("click", pipeFiltrar);
 
 });
