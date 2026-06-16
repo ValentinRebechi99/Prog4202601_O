@@ -28,6 +28,40 @@ const cargarEstudiantes = async () => {
     }
 };
 
+const filtrarEstudiantes = async () => {
+
+    try {
+
+        const dniBuscado =
+            document.getElementById("buscardni").value.trim();
+
+        const params = new URLSearchParams();
+
+        if (dniBuscado) {
+            params.append("documento", dniBuscado);
+        }
+
+        const respuesta = await fetch(
+            `http://localhost:3000/estudiantes?${params.toString()}`
+        );
+
+        if (!respuesta.ok) {
+            throw new Error();
+        }
+
+        const datos = await respuesta.json();
+
+        console.log(datos);
+
+        mostrarEstudiantes(datos);
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+};
+
 const mostrarEstudiantes = (datos) => {
 
     const tabla = document.getElementById("tbodyEstudiantes");
@@ -96,4 +130,11 @@ const mostrarEstudiantes = (datos) => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", cargarEstudiantes);
+document.addEventListener("DOMContentLoaded", () => {
+
+    cargarEstudiantes();
+
+    document.getElementById("btnBuscar")
+        .addEventListener("click", filtrarEstudiantes);
+
+});
