@@ -1,8 +1,10 @@
+import CursoService from "../services/curso.service.js";
 import InscripcionService from "../services/inscripciones.service.js";
 
 class InscripcionesController {
     constructor() {
-        this.servicio = new InscripcionService
+        this.servicio = new InscripcionService;
+        this.cursos = new CursoService;
     }
 
     findAll = async (req, res) => {
@@ -20,6 +22,10 @@ class InscripcionesController {
     create = async (req, res) => {
         try {
             const { body } = req;
+            const validate = await  this.cursos.isFull(body.idCurso);
+            if (validate){
+                return res.status(400).json({ error: "no se puede crear inscripcion porque el curso esta lleno" });
+            }
             const data = await this.servicio.create(
                 body.idCurso,
                 body.idEstudiante, 

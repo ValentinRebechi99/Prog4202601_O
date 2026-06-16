@@ -7,6 +7,9 @@ const cursosFindAllValidation = [
     query('cantidadHoras').optional().notEmpty().withMessage('la cantidadHoras no puede estar vacia').isInt({min: 1, max:2147483647 }).withMessage('la cantidadHoras debe ser un numero').toInt(),
     query('inscriptosMax').optional().notEmpty().withMessage('inscriptosMax no puede estar vacio').isInt({min: 1, max:32767}).withMessage('nombre debe ser un entero entre 1 y 32767').toInt(),
     query('idCursoEstado').optional().notEmpty().withMessage('idCursoEstado no puede estar vacio').isInt({min: 1, max:4}).withMessage('idCursoEstado debe ser un entero entre 1 y 4').toInt(),
+    query('lleno')
+        .optional()
+        .isBoolean().withMessage('lleno debe ser un booleano'),
     query('limit')
         .optional()
         .isInt({ min: 0 }).withMessage('limit debe ser un entero no negativo')

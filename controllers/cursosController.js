@@ -6,8 +6,6 @@ class CursosController {
     }
 
     findAll = async (req, res) => {
-        console.log(req.query);
-        console.log(req.filter);
         try {
             const { filter, limit, offset, order } = req;
             const data = await this.servicio.findall(filter, limit, offset, order);

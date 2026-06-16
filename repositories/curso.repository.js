@@ -8,14 +8,23 @@ export default class CursoRepository {
         let strOrder = '';
         let strLimit = '';
         let strOffset = '';
-
         if (filter && Object.keys(filter).length > 0) {
 
             Object.entries(filter).forEach(([key, value]) => {
-                if (typeof value === 'string') {
-                    strWhere += `AND c.${key} ILIKE '%${value}%' `
-                } else {
-                    strWhere += `AND c.${key} = ${value} `
+                if (key === 'lleno') {
+                    if (value === 'true') {
+                        strWhere += ` AND c.inscriptos_max > (
+                            SELECT COUNT(*) 
+                            FROM public.inscripciones i 
+                            WHERE i.id_curso  = c.id_curso
+                        ) `
+                    }
+                } 
+                else if (typeof value === 'string') {
+                    strWhere += ` AND c.${key} ILIKE '%${value}%' `
+                } 
+                else {
+                    strWhere += ` AND c.${key} = ${value} `
                 }
             });
         }
@@ -57,7 +66,6 @@ export default class CursoRepository {
             ${strOffset};        
         `;
         const { rows } = await client.query(strSql);
-        console.log(JSON.stringify(rows));
         client.release();
         return rows;
     }

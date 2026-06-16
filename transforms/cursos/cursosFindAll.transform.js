@@ -10,6 +10,7 @@ const cursosFindAllTransform = (req, res, next) => {
             cantidadHoras,
             inscriptosMax,
             idCursoEstado,
+            lleno,
             order,
             limit,
             offset,
@@ -17,6 +18,7 @@ const cursosFindAllTransform = (req, res, next) => {
           } = req.query;
     if (limit) req.limit = limit;
     if (offset) req.offset = offset;
+    if (lleno) filterObj.lleno = lleno.toLowerCase();
     if (idCurso) filterObj.idCurso = parseInt(idCurso);
     if (nombre) filterObj.nombre = nombre;
     if (descripcion) filterObj.descripcion = descripcion;

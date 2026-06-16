@@ -11,6 +11,7 @@ export default class CursoService extends BaseService {
         cantidadHoras: 'cantidad_horas',
         inscriptosMax: 'inscriptos_max',
         idCursoEstado: 'id_curso_estado',
+        lleno: 'lleno',
         estado: 'estado',
         idUsuarioModificacion: 'id_usuario_modificacion',
         fechaHoraModificacion: 'fecha_hora_modificacion',
@@ -46,5 +47,15 @@ export default class CursoService extends BaseService {
         const respuestaBD = await this.repository.destroy(cursoID, idUsuarioModificacion);
         const respuesta = respuestaBD.map(curso => (new CursoResponseDTO(curso)));
         return respuesta;
+    }
+
+    async isFull(cursoID){
+        //{"lleno":"true","id_curso":2}
+        const filter = {
+            lleno: "true",
+            id_curso: cursoID,
+        };
+        const respuestaBD = await this.repository.findall(filter, null, null, null);
+        return respuestaBD=="";
     }
 }

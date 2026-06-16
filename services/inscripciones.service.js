@@ -7,19 +7,13 @@ export default class InscripcionService extends BaseService {
         idInscripcion: 'id_inscripcion',
         idCurso: 'id_curso',
         idEstudiante: 'id_estudiante',
+        documento: 'documento',
+        apellido: 'apellido',
+        nombres: 'nombres',
         fechaHoraInscripcion: 'fecha_hora_inscripcion',
         idInscripcionEstado: 'id_inscripcion_estado',
         idUsuarioModificacion: 'id_usuario_modificacion',
         fechaHoraModificacion: 'fecha_hora_modificacion',
-
-        idEstudiante: 'id_estudiante',
-        documento: 'documento',
-        apellido: 'apellido',
-        nombres: 'nombres',
-        email: 'email',
-        fechaNacimiento: 'fecha_nacimiento',
-        activo: 'activo',
-        idUsuarioModificacion: 'id_usuario_modificacion'
     };
 
     constructor() {
