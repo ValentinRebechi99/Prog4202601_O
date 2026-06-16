@@ -1,11 +1,39 @@
 let cursos = [];
 
+var pagina = 0;
+const limit = 4;
+document.getElementById("NumberPage").textContent = pagina+1;
+const ButtonBack = document.getElementById("ButtonBack");
+const ButtonNext = document.getElementById("ButtonNext");
+
+ButtonBack.addEventListener("click", async (evt) => {
+    if(pagina!=0){
+        pagina = pagina-1;
+    }
+    document.getElementById("NumberPage").textContent = pagina+1;
+    if(document.getElementById("buscarCurso").value.trim() == "" & document.getElementById("buscarCurso").value.trim() == ""){
+        cargarCursos();
+    } else {
+        filtrarCursos();
+    }
+});
+
+ButtonNext.addEventListener("click", async (evt) => {
+    pagina = pagina+1;
+    document.getElementById("NumberPage").textContent = pagina+1;
+    if(document.getElementById("buscarCurso").value.trim() == "" & document.getElementById("buscarCurso").value.trim() == ""){
+        cargarCursos();
+    } else {
+        filtrarCursos();
+    }
+});
+
 const cargarCursos = async () => {
 
     try {
-
+        console.log(`http://localhost:3000/cursos?limit=${limit}&offset=${pagina*limit}`);
         const respuesta = await fetch(
-            "http://localhost:3000/cursos"
+            `http://localhost:3000/cursos?limit=${limit}&offset=${pagina*limit}`
         );
 
         if (!respuesta.ok) {
@@ -25,10 +53,15 @@ const cargarCursos = async () => {
     }
 };
 
+// el uso de esta funcion es para arreglar un problema de paginacion
+const pipeFiltrar = async () => {
+    pagina = 0;
+    document.getElementById("NumberPage").textContent = pagina+1;
+    filtrarCursos();
+}
+
 const filtrarCursos = async () => {
-
     try {
-
         const idBuscado =
             document.getElementById("buscarCurso").value.trim();
 
@@ -48,6 +81,8 @@ const filtrarCursos = async () => {
 
         if (estadoBuscado)
             params.append("idCursoEstado", estadoBuscado);
+        params.append("limit", limit);
+        params.append("offset",(pagina*limit));
         console.log(params.toString());
         const respuesta = await fetch(
             `http://localhost:3000/cursos?${params.toString()}`
@@ -88,7 +123,7 @@ const mostrarCursos = (datos) => {
             <td>${curso.descripcion}</td>
             <td>${new Date(curso.fechaInicio).toLocaleDateString()}</td>
             <td>${curso.cantidadHoras}</td>
-            <td>${curso.inscriptosMax}</td>
+            <td>${curso.inscriptos}/${curso.inscriptosMax}</td>
             <td>${curso.estado}</td>
             <td>
                 <div class="boton-mod">
@@ -152,6 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const estado = document.getElementById("estado");
 
     document.getElementById("btnBuscar")
-        .addEventListener("click", filtrarCursos);
+        .addEventListener("click", pipeFiltrar);
 
 });

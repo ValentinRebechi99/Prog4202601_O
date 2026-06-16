@@ -155,7 +155,6 @@ th:nth-child(3) { width: 20%; } /* Instructor */
     border: none;
     background: none;
     color: #06000a; /* Deshabilitado por defecto */
-    cursor: not-allowed;
     font-size: 16px;
 }
 /* Tabla Index*/

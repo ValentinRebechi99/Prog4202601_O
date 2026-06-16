@@ -19,7 +19,6 @@ export default class UsuarioRepository {
     }
 
     findById = async (userId) => {
-        console.log(userId);
         const client = await conexion.createConnection();
         const strSql = `
             SELECT id_usuario AS userId, nombre, apellido, nombre_usuario AS username 

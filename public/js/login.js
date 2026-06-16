@@ -44,7 +44,7 @@ const envio = document.getElementById("btnIncioSesion");
         } catch (error) {
             if(error instanceof TypeError){
                 document.getElementById("ErrorServer").classList.remove('d-none'); 
-                document.getElementById("ErrorServer").textContent("error interno del servidor");
+                document.getElementById("ErrorServer").textContent = "error interno del servidor";
             }
             console.error(error);
         }

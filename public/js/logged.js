@@ -15,7 +15,8 @@ async function isUserLogged(){
 
         if (!respuesta.ok) {
             if (respuesta.status == 401){
-                //localStorage.removeItem('auth_token');
+                localStorage.removeItem('auth_token');
+                document.cookie = "auth_token=; path=/; max-age=0; SameSite=Strict";
             } 
             throw new Error(`Response ${respuesta.status}`);
         }

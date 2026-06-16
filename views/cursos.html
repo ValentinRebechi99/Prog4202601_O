@@ -58,7 +58,7 @@
 
             </div>
             <div class="tabla-card">
-                <table>
+                <table class="table table-bordered text-center">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -66,7 +66,7 @@
                             <th>Descripcion</th>
                             <th>Fecha Inicio</th>
                             <th>Cantidad de horas</th>
-                            <th>Maximo Inscriptos</th>
+                            <th>Inscriptos</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -78,9 +78,9 @@
                 <div class="footer-tabla">
                     <span class="badge-registros">x Registros</span>
                     <div class="paginacion">
-                        <button disabled>← Ant</button>
-                        <span>1/1</span>
-                        <button disabled>Sig →</button>
+                        <button id="ButtonBack">← Ant</button>
+                        <a id="NumberPage"></a>
+                        <button id="ButtonNext">Sig →</button>
                     </div>
                 </div>
             </div>
