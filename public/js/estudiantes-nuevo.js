@@ -1,3 +1,5 @@
+const token = localStorage.getItem('auth_token');
+
 const iniciar = () => {
 
     const envio = document.getElementById("btnGuardarEstudiante");
@@ -16,17 +18,18 @@ const iniciar = () => {
             activo: document.getElementById("activo").value === "true" ? 1 : 0
 
         };
-        console.log(obj);
+  /*       console.log(obj); */
         document.getElementById("ErrorServer")
             .classList.add("d-none");
 
         try {
 
             const respuesta = await fetch(
-                "http://localhost:3000/estudiantes",
+                "/estudiantes",
                 {
                     method: "POST",
                     headers: {
+                        "Authorization": `Bearer ${token}`,
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(obj)
@@ -49,7 +52,7 @@ const iniciar = () => {
             alert("Estudiante guardado correctamente");
 
             window.location.href =
-                "http://localhost:3000/estudiantes.html";
+                "/estudiantes.html";
 
         } catch (error) {
 

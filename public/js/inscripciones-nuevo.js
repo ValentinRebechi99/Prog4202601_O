@@ -1,3 +1,5 @@
+const token = localStorage.getItem('auth_token');
+
 const iniciar = () => {
 
     const envio = document.getElementById("btnGuardarInscripcion");
@@ -18,9 +20,10 @@ const iniciar = () => {
 
         try {
 
-            const respuesta = await fetch("http://localhost:3000/inscripciones", {
+            const respuesta = await fetch("/inscripciones", {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(obj)
@@ -47,7 +50,14 @@ const iniciar = () => {
 
 
 const cargarEstudiantes = async () => {
-    const res = await fetch("http://localhost:3000/estudiantes");
+    const res = await fetch("/estudiantes",
+    {
+        method: "GET",
+
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
     const estudiantes = await res.json();
 
     const select = document.getElementById("idEstudiante");
@@ -63,7 +73,14 @@ const cargarEstudiantes = async () => {
 };
 
 const cargarCursos = async () => {
-    const res = await fetch("http://localhost:3000/cursos");
+    const res = await fetch("/cursos",
+    {
+        method: "GET",
+
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
     const cursos = await res.json();
 
     const select = document.getElementById("idCurso");

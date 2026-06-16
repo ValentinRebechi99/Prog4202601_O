@@ -29,19 +29,19 @@ export default class InscripcionService extends BaseService {
         return respuesta;
     }
 
-    async create(idCurso, idEstudiante, idInscripcionEstado, idUsuarioModificacion = 2) {
+    async create(idCurso, idEstudiante, idInscripcionEstado, idUsuarioModificacion) {
         const respuestaBD = await this.repository.create(idCurso, idEstudiante, idInscripcionEstado, idUsuarioModificacion);
         return new InscripcionResponseDTO(respuestaBD);
     }
 
-    async update(idInscripcion, idCurso, idEstudiante, fechaHoraInscripcion, idInscripcionEstado, idUsuarioModificacion = 2) {
+    async update(idInscripcion, idCurso, idEstudiante, fechaHoraInscripcion, idInscripcionEstado, idUsuarioModificacion) {
         const respuestaBD = await this.repository.update(idInscripcion, idCurso, idEstudiante, fechaHoraInscripcion, idInscripcionEstado, idUsuarioModificacion);
         const respuesta = respuestaBD.map(inscripcion => (new InscripcionResponseDTO(inscripcion)));
         return respuesta;
     }
 
-    async delete(idInscripcion, idUsuarioModificacion = 2) {
-        const respuestaBD = await this.repository.destroy(idInscripcion, idUsuarioModificacion = 2);
+    async delete(idInscripcion, idUsuarioModificacion) {
+        const respuestaBD = await this.repository.destroy(idInscripcion, idUsuarioModificacion);
         const respuesta = respuestaBD.map(inscripcion => (new InscripcionResponseDTO(inscripcion)));
         return respuesta;
     }

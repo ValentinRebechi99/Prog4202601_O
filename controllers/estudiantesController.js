@@ -27,8 +27,9 @@ class EstudiantesController {
                 body.email,
                 body.fechaNacimiento,
                 body.activo,
-                1
-            ); return res.status(201).send(data);
+                req.user.userid
+            ); 
+            return res.status(201).send(data);
 
         } catch (error) {
             console.error("Error en el controlador (create):", error);
@@ -48,7 +49,9 @@ class EstudiantesController {
                 body.email,
                 body.fechaNacimiento,
                 body.activo,
-                1);
+                req.user.userid
+            );
+
             res.send(data);
         }
         catch (error) {
@@ -63,7 +66,7 @@ class EstudiantesController {
             if (!estudianteId) {
                 res.status(400).send({ status: "Fallo", data: { error: "El parámetro estudianteId no puede ser vacío." } });
             }
-            const data = await this.servicio.delete(parseInt(estudianteId), 1);
+            const data = await this.servicio.delete(parseInt(estudianteId), req.user.userid);
             res.send(data);
         } catch (error) {
             console.error("Error en el controlador (update):", error);

@@ -1,3 +1,5 @@
+const token = localStorage.getItem('auth_token');
+
 const iniciar = () => {
     const envio = document.getElementById("btnGuardarCurso");
     envio.addEventListener("click", async (evt) => {
@@ -24,11 +26,12 @@ const iniciar = () => {
 
         try {
 
-            const respuesta = await fetch("http://localhost:3000/cursos",
+            const respuesta = await fetch("/cursos",
                 {
                     method: "POST",
 
                     headers: {
+                        "Authorization": `Bearer ${token}`,
                         "Content-Type": "application/json"
                     },
 
@@ -66,13 +69,13 @@ const iniciar = () => {
                 throw new Error(`Response ${respuesta.status}`);
             }
 
-            const datos = await respuesta.json();
+/*             const datos = await respuesta.json();
 
-            console.log(datos);
+            console.log(datos); */
 
             alert("Curso guardado correctamente");
 
-            window.location.href = "http://localhost:3000/cursos.html";
+            window.location.href = "/cursos.html";
 
         } catch (error) {
             if(error instanceof TypeError){

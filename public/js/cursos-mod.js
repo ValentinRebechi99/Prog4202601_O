@@ -1,3 +1,5 @@
+const token = localStorage.getItem('auth_token');
+
 const cargarCurso = async () => {
 
     const cursoId = window.location.hash.substring(1);
@@ -5,7 +7,14 @@ const cargarCurso = async () => {
     try {
 
         const respuesta = await fetch(
-            `http://localhost:3000/cursos/?idCurso=${cursoId}`
+            `/cursos/?idCurso=${cursoId}`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
         );
 
         if (!respuesta.ok) {
@@ -97,10 +106,11 @@ const iniciar = () => {
         try {
 
             const respuesta = await fetch(
-                `http://localhost:3000/cursos/${cursoId}`,
+                `/cursos/${cursoId}`,
                 {
                     method: "PUT",
                     headers: {
+                        "Authorization": `Bearer ${token}`,
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(obj)

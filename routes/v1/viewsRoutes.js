@@ -23,7 +23,7 @@ const requireJWT = (req, res, next) => {
     })(req, res, next);
 };
 
-/* router.get("/contacto.html", (req, res) => {
+router.get("/contacto.html", (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'contacto.html'));
 });
 
@@ -51,47 +51,16 @@ router.get("/estudiantes.html",requireJWT, (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'estudiantes.html'));
 });
 
-router.get("/login.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'login.html'));
-}); */
-
-router.get("/contacto.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'contacto.html'));
-});
-
-router.get("/cursos-mod.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'cursos-mod.html'));
-});
-
-router.get("/cursos-nuevo.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'cursos-nuevo.html'));
-});
-
-router.get("/cursos.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'cursos.html'));
-});
-
-router.get("/estudiantes-nuevo.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'estudiantes-nuevo.html'));
-});
-
-router.get("/estudiantes-mod.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'estudiantes-mod.html'));
-});
-
-router.get("/estudiantes.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'estudiantes.html'));
-});
-
-router.get("/login.html", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'login.html'));
-});
-
-router.get("/inscripciones.html", (req, res) => {
+router.get("/inscripciones.html",requireJWT, (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'inscripciones.html'));
 });
 
-router.get("/inscripciones-nuevo.html", (req, res) => {
+router.get("/inscripciones-nuevo.html",requireJWT, (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'views', 'inscripciones-nuevo.html'));
 });
+
+router.get("/login.html", (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'views', 'login.html'));
+}); 
+
 export { router };

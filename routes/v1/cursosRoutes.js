@@ -1,4 +1,5 @@
 import express from "express";
+import passport from 'passport';
 //imports cursos
 import CursosController from "../../controllers/cursosController.js";
 import cursosFindAllValidation from "../../validators/cursos/cursosFindAll.validation.js";
@@ -13,10 +14,10 @@ const router = express.Router();
 const cursosController = new CursosController();
 
 //rutas cursos
-router.get("/cursos", [cursosFindAllValidation, cursosFindAllTransform], cursosController.findAll.bind(cursosController));
-router.post("/cursos", cursosCreateValidation, cursosController.create.bind(cursosController));
-router.put("/cursos/:cursoId", cursosUpdateValidation, cursosController.update.bind(cursosController));
-router.delete("/cursos/:cursoId", cursosDeleteValidation ,cursosController.delete.bind(cursosController));
-router.post("/generarCertificado", pdfGenerateValidation, pdfController);
+router.get("/cursos", passport.authenticate('jwt', { session: false }), [cursosFindAllValidation, cursosFindAllTransform], cursosController.findAll.bind(cursosController));
+router.post("/cursos", passport.authenticate('jwt', { session: false }), cursosCreateValidation, cursosController.create.bind(cursosController));
+router.put("/cursos/:cursoId", passport.authenticate('jwt', { session: false }), cursosUpdateValidation, cursosController.update.bind(cursosController));
+router.delete("/cursos/:cursoId", passport.authenticate('jwt', { session: false }), cursosDeleteValidation ,cursosController.delete.bind(cursosController));
+router.post("/generarCertificado", passport.authenticate('jwt', { session: false }), pdfGenerateValidation, pdfController);
 
 export { router };

@@ -1,3 +1,5 @@
+const token = localStorage.getItem('auth_token');
+
 let cursos = [];
 
 var pagina = 0;
@@ -32,7 +34,14 @@ const cargarCursos = async () => {
 
     try {
         const respuesta = await fetch(
-            `http://localhost:3000/cursos?limit=${limit}&offset=${pagina*limit}`
+            `/cursos?limit=${limit}&offset=${pagina*limit}`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
         );
 
         if (!respuesta.ok) {
@@ -84,7 +93,14 @@ const filtrarCursos = async () => {
         params.append("offset", (pagina * limit));
         
         const respuesta = await fetch(
-            `http://localhost:3000/cursos?${params.toString()}`
+            `/cursos?${params.toString()}`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
         );
 
         if (!respuesta.ok) {
@@ -142,7 +158,7 @@ const mostrarCursos = (datos) => {
             .addEventListener("click", async () => {
 
                 const confirmar = confirm(
-                    "Â¿Desea eliminar este curso?"
+                    "¿Desea eliminar este curso?"
                 );
 
                 if (!confirmar) return;
@@ -150,9 +166,13 @@ const mostrarCursos = (datos) => {
                 try {
 
                     const respuesta = await fetch(
-                        `http://localhost:3000/cursos/${curso.idCurso}`,
+                        `/cursos/${curso.idCurso}`,
                         {
-                            method: "DELETE"
+                            method: "DELETE",
+
+                            headers: {
+                                "Authorization": `Bearer ${token}`
+                            }
                         }
                     );
 

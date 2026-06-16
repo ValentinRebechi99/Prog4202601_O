@@ -28,21 +28,21 @@ export default class EstudianteService extends BaseService {
         return respuesta;
     }
 
-    async create(documento, apellido, nombres, email, fecha_nacimiento, activo, idUsuarioModificacion = 2) {
+    async create(documento, apellido, nombres, email, fecha_nacimiento, activo, idUsuarioModificacion) {
         const respuestaBD = await this.repository.create(documento, apellido, nombres, email, fecha_nacimiento, activo, idUsuarioModificacion);
 
         return new EstudianteResponseDTO(respuestaBD);
     }
 
-    async update(idEstudiante, documento, apellido, nombres, email, fechaNacimiento, activo, idUsuarioModificacion = 2) {
+    async update(idEstudiante, documento, apellido, nombres, email, fechaNacimiento, activo, idUsuarioModificacion) {
 
         const respuestaBD = await this.repository.update(idEstudiante, documento, apellido, nombres, email, fechaNacimiento, activo, idUsuarioModificacion);
         const respuesta = respuestaBD.map(estudiante => (new EstudianteResponseDTO(estudiante)));
         return respuesta;
     }
 
-    async delete(estudianteID, idUsuarioModificacion = 2) {
-        const respuestaBD = await this.repository.destroy(estudianteID, idUsuarioModificacion = 2);
+    async delete(estudianteID, idUsuarioModificacion) {
+        const respuestaBD = await this.repository.destroy(estudianteID, idUsuarioModificacion);
         const respuesta = respuestaBD.map(estudiante => (new EstudianteResponseDTO(estudiante)));
         return respuesta;
     }

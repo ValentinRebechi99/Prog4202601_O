@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudiantes FCAD- UNER</title>
+    <title>Inscripciones FCAD- UNER</title>
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
@@ -46,18 +46,18 @@
                 <select id="selectCurso" class="form-control">
                     <option value="">Seleccione un curso</option>
                 </select>
-                <button id="btnBuscar" class="btn btn-primary">buscar</button>
-
-
-                </select>
+                <br>
+                <p class="h5"><u>Inscriptos en el curso</u></p>
+                <br>
 
                 <div class="tabla-cardE">
-                    <table>
+                    <table class="table table-bordered text-center">
                         <thead>
                             <tr>
 
-                                <th>DNI</th>
-                                <th>Apellido</th>
+                                <th class="text-center">DNI</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Apellido</th>
 
 
                             </tr>
@@ -66,11 +66,10 @@
                     </table>
 
                     <div class="footer-tabla">
-
                         <div class="paginacion">
-                            <button disabled>← Ant</button>
-                            <span>1/1</span>
-                            <button disabled>Sig →</button>
+                            <button id="ButtonBack">← Ant</button>
+                            <a id="NumberPage"></a>
+                            <button id="ButtonNext">Sig →</button>
                         </div>
                     </div>
                 </div>

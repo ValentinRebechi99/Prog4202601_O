@@ -6,11 +6,10 @@ const envio = document.getElementById("btnIncioSesion");
             username: document.getElementById("name").value,
             password: document.getElementById("pwd").value,
         };
-        console.log(obj);
         document.getElementById("ErrorServer").classList.add('d-none');
         try {
 
-            const respuesta = await fetch("http://localhost:3000/auth/login",
+            const respuesta = await fetch("/auth/login",
                 {
                     method: "POST",
 
@@ -33,7 +32,6 @@ const envio = document.getElementById("btnIncioSesion");
             }
 
             const datos = await respuesta.json();
-
             localStorage.setItem('auth_token', datos.token);
             document.cookie = `auth_token=${datos.token}; path=/; max-age=3600; SameSite=Strict`;
 

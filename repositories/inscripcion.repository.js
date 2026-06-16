@@ -8,7 +8,7 @@ export default class InscripcionRepository {
         let strOrder = '';
         let strLimit = '';
         let strOffset = '';
-
+        
         if (filter && Object.keys(filter).length > 0) {
             Object.entries(filter).forEach(([key, value]) => {
                 if (typeof value === 'string') {
@@ -48,7 +48,6 @@ export default class InscripcionRepository {
             ${strLimit}
             ${strOffset};
         `;
-
         const { rows } = await client.query(strSql);
         client.release();
         return rows;

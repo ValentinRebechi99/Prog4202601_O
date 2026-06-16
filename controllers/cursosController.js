@@ -27,8 +27,9 @@ class CursosController {
                 body.cantidadHoras,
                 body.inscriptosMaximos,
                 body.idCursoEstado,
-                1
-            ); return res.status(201).send(data);
+                req.user.userid
+            ); 
+            return res.status(201).send(data);
 
         } catch (error) {
             console.error("Error en el controlador (create):", error);
@@ -40,7 +41,7 @@ class CursosController {
         try {
             const { body } = req;
             const cursoId = req.params.cursoId;
-            const data = await this.servicio.update(cursoId, body.nombre, body.descripcion, body.fechaInicio, body.cantidadHoras, body.inscriptosMaximos, body.idCursoEstado, 1);
+            const data = await this.servicio.update(cursoId, body.nombre, body.descripcion, body.fechaInicio, body.cantidadHoras, body.inscriptosMaximos, body.idCursoEstado, req.user.userid);
             res.send(data);
         }
         catch (error) {
@@ -55,7 +56,7 @@ class CursosController {
             if (!cursoId) {
                 res.status(400).send({ status: "Fallo", data: { error: "El parámetro cursoID no puede ser vacío." } });
             }
-            const data = await this.servicio.delete(parseInt(cursoId),1);
+            const data = await this.servicio.delete(parseInt(cursoId), req.user.userid);
             res.send(data);
         } catch (error) {
             console.error("Error en el controlador (update):", error);

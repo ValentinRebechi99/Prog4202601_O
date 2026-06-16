@@ -1,3 +1,5 @@
+const token = localStorage.getItem('auth_token');
+
 const cargarEstudiante = async () => {
 
     const estudianteId = window.location.hash.substring(1);
@@ -5,7 +7,14 @@ const cargarEstudiante = async () => {
     try {
 
         const respuesta = await fetch(
-            `http://localhost:3000/estudiantes?idEstudiante=${estudianteId}`
+            `/estudiantes?idEstudiante=${estudianteId}`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
         );
 
         if (!respuesta.ok) {
@@ -86,10 +95,11 @@ const iniciar = () => {
         try {
 
             const respuesta = await fetch(
-                `http://localhost:3000/estudiantes/${estudianteId}`,
+                `/estudiantes/${estudianteId}`,
                 {
                     method: "PUT",
                     headers: {
+                        "Authorization": `Bearer ${token}`,
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(obj)
@@ -98,9 +108,9 @@ const iniciar = () => {
 
             if (!respuesta.ok) {
 
-                const errorBody = await respuesta.json();
+/*                 const errorBody = await respuesta.json();
 
-                console.log(errorBody);
+                console.log(errorBody); */
 
                 throw new Error(
                     `Response ${respuesta.status}`

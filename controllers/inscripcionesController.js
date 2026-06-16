@@ -30,8 +30,9 @@ class InscripcionesController {
                 body.idCurso,
                 body.idEstudiante, 
                 body.idInscripcionEstado, 
-                1
-            ); return res.status(201).send(data);
+                req.user.userid
+            ); 
+            return res.status(201).send(data);
 
         } catch (error) {
             console.error("Error en el controlador (create):", error);
@@ -48,7 +49,7 @@ class InscripcionesController {
                 body.idEstudiante,
                 body.fechaHoraInscripcion,
                 body.idInscripcionEstado, 
-                1,
+                req.user.userid
             );
             res.send(data);
         }
@@ -64,7 +65,7 @@ class InscripcionesController {
             if(!inscripcionId) {
                 res.status(400).send({ status: "Fallo", data: { error: "El parámetro estudianteId no puede ser vacío." } });
             }
-            const data = await this.servicio.delete(parseInt(inscripcionId),1);
+            const data = await this.servicio.delete(parseInt(inscripcionId),req.user.userid);
             res.send(data);
         } catch (error) {
             console.error("Error en el controlador (update):", error);

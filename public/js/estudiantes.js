@@ -1,3 +1,5 @@
+const token = localStorage.getItem('auth_token');
+
 let estudiantes = [];
 
 var pagina = 0;
@@ -33,7 +35,14 @@ const cargarEstudiantes = async () => {
     try {
 
         const respuesta = await fetch(
-            `http://localhost:3000/estudiantes?limit=${limit}&offset=${pagina*limit}`
+            `/estudiantes?limit=${limit}&offset=${pagina*limit}`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
         );
 
         if (!respuesta.ok) {
@@ -42,7 +51,7 @@ const cargarEstudiantes = async () => {
 
         estudiantes = await respuesta.json();
 
-        console.log(estudiantes);
+  /*       console.log(estudiantes); */
 
         mostrarEstudiantes(estudiantes);
 
@@ -77,7 +86,14 @@ const filtrarEstudiantes = async () => {
         params.append("limit", limit);
         params.append("offset", (pagina * limit));
         const respuesta = await fetch(
-            `http://localhost:3000/estudiantes?${params.toString()}`
+            `/estudiantes?${params.toString()}`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
         );
 
         if (!respuesta.ok) {
@@ -86,7 +102,7 @@ const filtrarEstudiantes = async () => {
 
         const datos = await respuesta.json();
 
-        console.log(datos);
+/*         console.log(datos); */
 
         mostrarEstudiantes(datos);
 
@@ -141,9 +157,13 @@ const mostrarEstudiantes = (datos) => {
                 try {
 
                     const respuesta = await fetch(
-                        `http://localhost:3000/estudiantes/${estudiante.idEstudiante}`,
+                        `/estudiantes/${estudiante.idEstudiante}`,
                         {
-                            method: "DELETE"
+                            method: "DELETE",
+
+                            headers: {
+                                "Authorization": `Bearer ${token}`
+                            }
                         }
                     );
 
