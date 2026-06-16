@@ -92,8 +92,7 @@ export default class CursoRepository {
             ];
 
             const { rows } = await client.query(strSql, parametros);
-            const nuevoId = rows[0].id_curso;
-            const response = await this.findById(nuevoId);
+            const response = rows[0];
             client.release();
             return response;
         }
