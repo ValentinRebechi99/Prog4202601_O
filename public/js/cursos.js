@@ -31,9 +31,8 @@ ButtonNext.addEventListener("click", async (evt) => {
 const cargarCursos = async () => {
 
     try {
-        
         const respuesta = await fetch(
-            `http://localhost:3000/cursos?limit=${limit}&offset=${pagina * limit}`
+            `http://localhost:3000/cursos?limit=${limit}&offset=${pagina*limit}`
         );
 
         if (!respuesta.ok) {
